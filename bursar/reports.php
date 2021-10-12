@@ -210,9 +210,9 @@ if (empty($_SESSION['bursar']) OR empty($_SESSION['type'])) {
 				$sql = "SELECT sum(doctor_price) AS aa FROM `medication` WHERE `date`='$day' AND `month`='$month' AND `year`='$year'";
 				$result = mysqli_query($con,$sql);
 				while ($row = mysqli_fetch_array($result)) {
-					$sql1 = mysqli_query("SELECT sum(test_price) AS bb FROM `medication` WHERE `date`='$day' AND `month`='$month' AND `year`='$year'");
+					$sql1 = mysqli_query($con,"SELECT sum(test_price) AS bb FROM `medication` WHERE `date`='$day' AND `month`='$month' AND `year`='$year'");
 					while ($row1 = mysqli_fetch_array($sql1)) {
-						$sql2 =mysqli_query("SELECT sum(medical_price) AS cc FROM `medication` WHERE `date`='$day' AND `month`='$month' AND `year`='$year'");
+						$sql2 =mysqli_query($con,"SELECT sum(medical_price) AS cc FROM `medication` WHERE `date`='$day' AND `month`='$month' AND `year`='$year'");
 						while ($row2 = mysqli_fetch_assoc($sql2)) {
 							$all = $row['aa'] + $row1['bb'] + $row2['cc'];
 							echo "is: <b>".number_format($all);

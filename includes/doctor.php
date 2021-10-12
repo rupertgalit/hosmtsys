@@ -103,6 +103,7 @@ function addsymptoms()
 	if (!empty($symptoms)) {
 		$id = $_GET['id'];
 		@require_once "connect.php";
+		include "connect.php";
 
 		$sql = "UPDATE `medication` SET `status`='laboratory',`symptoms`='$symptoms',`tests`='$test' WHERE `id`='$id'";
 		$query = mysqli_query($con,$sql);
@@ -111,7 +112,7 @@ function addsymptoms()
 			$month = date('m');
 			$year = date('Y');
 			$doctor = $_SESSION['doctor'];
-			$report = mysqli_query("INSERT INTO `doctorreport` VALUES ('','$doctor','$id','$day','$month','$year')");
+			$report = mysqli_query($con,"INSERT INTO `doctorreport` VALUES ('','$doctor','$id','$day','$month','$year')");
 			echo "<br><b style='color:#008080;font-size:14px;font-family:Arial;'>Succesifully Sent</b>";
 		}
 	}
@@ -123,6 +124,7 @@ function addmedicine()
 	if (!empty($medicine)) {
 		$id = $_GET['id'];
 		@require_once "connect.php";
+		include "connect.php";
 
 		$sql = "UPDATE `medication` SET `status`='pharmacy',`medical`='$medicine' WHERE `id`='$id'";
 		$query = mysqli_query($con,$sql);

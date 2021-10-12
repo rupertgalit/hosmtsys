@@ -19,6 +19,120 @@ function patients()
 	}
 }
 
+function patients_records()
+{
+	require 'connect.php';
+	$sql = "SELECT * from medication Inner JOIN patient on medication.patient_id = patient.id;";
+	$query = mysqli_query($con,$sql);
+	while ($row = mysqli_fetch_array($query)) {
+		echo "<tr height=30px'>";
+		echo "<td>".$row['patient_id']."</td>";
+		echo "<td>".$row['fname']."</td>";
+		echo "<td>".$row['sname']."</td>";
+		echo "<td>".$row['phone']."</td>";
+		echo "<td>".$row['sex']."</td>";
+		echo "<td>".$row['birthyear']."</td>";
+		echo "<td><center><a href='viewpatient-records.php?patient_id=".$row['patient_id']."'>View</a></center></td>";
+		echo "<td><center><a href='editpatient.php?id=".$row['id']."'><img src='../assets/img/glyphicons-151-edit.png' height='16px' width='17px'></a></center></td>";
+		echo "<td><center><a href='deletepatient.php?id=".$row['id']."'><img src='../assets/img/glyphicons-17-bin.png' height='16px' width='12px'></a></center></td>";
+		echo "</tr>";
+	}
+}
+
+function viewpatients_records()
+{
+	$id = $_GET['patient_id'];
+	require 'connect.php';
+	$sql = "SELECT * from medication Inner JOIN patient on medication.patient_id = patient.id WHERE `patient_id`='$id'";
+	$query = mysqli_query($con,$sql);
+
+	while ($row = mysqli_fetch_array($query)) {
+		$year = date('Y') - $row['birthyear'];
+		echo "
+		<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>ID</b></td>
+				<td>".$row['patient_id']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>STATUS</b></td>
+				<td>".$row['status']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>PATIENT'S NAME</b></td>
+				<td>".$row['fname']." ".$row['sname']."</td>
+			</tr>
+
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>EMAIL</b></td>
+				<td>".$row['email']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>ADDRESS</b></td>
+				<td>".$row['address']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>PHONE</b></td>
+				<td>".$row['phone']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>GENDER</b></td>
+				<td>".$row['sex']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>BLOOD TYPE</b></td>
+				<td>".$row['bloodgroup']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>AGE</b></td>
+				<td>".$year."</td>
+			</tr>
+		";
+	}
+
+}
+
+function viewpatients_records2()
+{
+	$id = $_GET['patient_id'];
+	require 'connect.php';
+	$sql = "SELECT * from medication Inner JOIN patient on medication.patient_id = patient.id WHERE `patient_id`='$id'";
+	$query = mysqli_query($con,$sql);
+
+	while ($row = mysqli_fetch_array($query)) {
+		$year = date('Y') - $row['birthyear'];
+		echo "
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>DOCTOR TYPE</b></td>
+				<td>".$row['doctor_type']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>SYMPTOMS</b></td>
+				<td>".$row['symptoms']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>TESTS</b></td>
+				<td>".$row['tests']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>TEST RESULT</b></td>
+				<td>".$row['test_results']."</td>
+			</tr>
+
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>MEDICAL</b></td>
+				<td>".$row['medical']."</td>
+			</tr>
+
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>MEDICAL</b></td>
+
+			</tr>
+		";
+	}
+
+}
+
+
 function viewpatient()
 {
 	$id = $_GET['id'];

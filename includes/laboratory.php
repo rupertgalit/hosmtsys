@@ -54,6 +54,7 @@ function addresult()
 			if (!empty($results)) {
 				$id = $_GET['id'];
 				@require_once "connect.php";
+				include "connect.php";
 
 				$sql = "UPDATE `medication` SET `status`='labdoctor',`test_results`='$results',`test_price`='$price' WHERE `id`='$id'";
 				$query = mysqli_query($con,$sql);

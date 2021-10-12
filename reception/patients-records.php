@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (empty($_SESSION['bursar']) OR empty($_SESSION['type'])) {
+if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 	header("Location: ../index.php");
 }
 ?>
@@ -29,20 +29,19 @@ if (empty($_SESSION['bursar']) OR empty($_SESSION['type'])) {
 			<a href="addpatient.php" style="margin-left:10px;" style="float:left;"><button class="btnlink">Add Patient</button></a><form action="search.php" method="get" style="float:right;margin-right:15px;"><input type="text" style="height:25px; width:180px;padding-left:15px;" name="s" placeholder="Search Patient By ID"></form><br>
 			<table class="table" style="width:98% !important;">
 				<tr>
-					<th>Patient ID</th>
+					<th>Id</th>
 					<th>Firstname</th>
 					<th>Surname</th>
-					<th>Sex</th>
-					<th>Email</th>
 					<th>Phone</th>
-					<th>Address</th>
-					<th>Blood Type</th>
-					<th>Birth Year</th>
+					<th>Sex</th>
+					<th>Birth Year/th>
+					<th>View</th>
+					<th>Edit</th>
 					<th>Delete</th>
 				</tr>
 				<?php
-				require '../includes/bursar.php';
-				patients2();
+				require '../includes/reception.php';
+				patients_records();
 				 ?>
 			</table>
 		</div>

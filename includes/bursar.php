@@ -23,6 +23,25 @@ function settings()
 				}
 		}
 	}
+	function patients2()
+	{
+		require 'connect.php';
+		$sql = "SELECT * from medication Inner JOIN patient on medication.patient_id = patient.id;";
+		$query = mysqli_query($con,$sql);
+		while ($row = mysqli_fetch_array($query)) {
+			echo "<tr height=30px'>";
+			echo "<td>".$row['fname']."</td>";
+			echo "<td>".$row['id']."</td>";
+			echo "<td>".$row['status']."</td>";
+			echo "<td>".$row['symptoms']."</td>";
+			echo "<td>".$row['tests']."</td>";
+			echo "<td>".$row['test_results']."</td>";
+			echo "<td><center><a href='viewpatient.php?id=".$row['id']."'>View</a></center></td>";
+			echo "<td><center><a href='editpatient.php?id=".$row['id']."'><img src='../assets/img/glyphicons-151-edit.png' height='16px' width='17px'></a></center></td>";
+			echo "<td><center><a href='deletepatient.php?id=".$row['id']."'><img src='../assets/img/glyphicons-17-bin.png' height='16px' width='12px'></a></center></td>";
+			echo "</tr>";
+		}
+	}
 
 
 ?>

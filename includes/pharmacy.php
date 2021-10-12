@@ -29,6 +29,7 @@ function addmedicine()
 			if (!empty($price)) {
 				$id = $_GET['id'];
 				@require_once "connect.php";
+				include "connect.php";
 
 				$sql = "UPDATE `medication` SET `status`='finish',`medical_price`='$price'  WHERE `id`='$id'";
 				$query = mysqli_query($con,$sql);
