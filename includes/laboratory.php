@@ -8,7 +8,7 @@ function patients()
 	$query = mysqli_query($con,$sql);
 	while ($row = mysqli_fetch_array($query)) {
 		$ido = $row['patient_id'];
-		$sql2 = "SELECT * FROM `patient` WHERE `id`='$ido'";
+		$sql2 = "SELECT * FROM `assigned_patient` WHERE `patient_id`='$ido'";
 		$query2 = mysqli_query($con,$sql2);
 		while ($row2 = mysqli_fetch_array($query2)) {
 			echo "<tr height=30px'>";
@@ -32,9 +32,9 @@ function resultpatients()
 	while ($row = mysqli_fetch_array($query)) {
 		$ido = $row['patient_id'];
 		//$result = $row['patient_id'];
-		$sql2 = "SELECT * FROM `patient` WHERE `id`='$ido'";
+		$sql2 = "SELECT * FROM `assigned_patient` WHERE `patient_id`='$ido'";
 		$query2 = mysqli_query($con,$sql2);
-		while ($row2 = mysqli_fetch_array($con,$query2)) {
+		while ($row2 = mysqli_fetch_array($query2)) {
 			echo "<tr height=30px'>";
 			echo "<td>P-".$row2['id']."</td>";
 			echo "<td>".$row2['fname']." ".$row2['sname']."</td>";
@@ -73,9 +73,9 @@ function searchpatients()
 			$query = mysqli_query($con,$sql);
 			while ($row = mysqli_fetch_array($query)) {
 				$ido = $row['patient_id'];
-				$sql2 = "SELECT * FROM `patient` WHERE `id`='$ido' AND `id` LIKE '%$fname%'";
+				$sql2 = "SELECT * FROM `assigned_patient` WHERE `patient_id`='$ido' AND `patient_id` LIKE '%$fname%'";
 				$query2 = mysqli_query($con,$sql2);
-		while ($row2 = mysqli_fetch_array($con,$query2)) {
+		while ($row2 = mysqli_fetch_array($query2)) {
 			echo "<tr height=30px'>";
 			echo "<td>P-".$row2['id']."</td>";
 			echo "<td>".$row2['fname']."</td>";

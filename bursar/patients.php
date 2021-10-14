@@ -38,7 +38,9 @@ if (empty($_SESSION['bursar']) OR empty($_SESSION['type'])) {
 					<th>Address</th>
 					<th>Blood Type</th>
 					<th>Birth Year</th>
-					<th>Delete</th>
+					<th>Doctor Type</th>
+					<th>STATUS</th>
+
 				</tr>
 				<?php
 				require '../includes/bursar.php';

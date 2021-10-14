@@ -26,7 +26,9 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 		include "includes/left.php";
 	 ?>
 		<div class="right"><br>
-			<a href="addpatient.php" style="margin-left:10px;" style="float:left;"><button class="btnlink">Add Patient</button></a><form action="search.php" method="get" style="float:right;margin-right:15px;"><input type="text" style="height:25px; width:180px;padding-left:15px;" name="s" placeholder="Search Patient By ID"></form><br>
+			<!-- <a href="addpatient.php" style="margin-left:10px;" style="float:left;"><button class="btnlink">Add Patient</button></a> -->
+			<form action="search.php" method="get" style="float:right;margin-right:15px;display:inline-block;"> <input type="text" style="height:25px; width:180px;padding-left:15px;" name="s" placeholder="Search Patient By ID"><input type="label" placeholder ="PATIENT'S RECORDS" ></form><br><br>
+
 			<table class="table" style="width:98% !important;">
 				<tr>
 					<th>Id</th>
@@ -34,7 +36,7 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 					<th>Surname</th>
 					<th>Phone</th>
 					<th>Sex</th>
-					<th>Birth Year/th>
+					<th>Birth Year</th>
 					<th>View</th>
 					<th>Edit</th>
 					<th>Delete</th>

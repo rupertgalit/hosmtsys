@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (empty($_SESSION['pharmacy']) OR empty($_SESSION['type'])) {
 	header("Location: ../index.php");
@@ -24,18 +24,16 @@ if (empty($_SESSION['pharmacy']) OR empty($_SESSION['type'])) {
 					<th>ID</th>
 					<th>Firstname</th>
 					<th>Lastname</th>
-					<th>Surname</th>
 					<th>Gender</th>
-					<th>Age</th>
 					<th>View Medicine</th>
 				</tr>
-				<?php 
+				<?php
 				require '../includes/pharmacy.php';
 				patients();
 				 ?>
 			</table>
 		</div>
-		<?php 
+		<?php
 		include "includes/footer.php";
 		 ?>
 	</div>

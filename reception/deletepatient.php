@@ -10,7 +10,7 @@ else{
 	$sql = "DELETE FROM `patient` WHERE `id`='$id'";
 	$query = mysqli_query($con,$sql);
 	if (!empty($query)) {
-		header("Location: patients.php");
+		header("Location: patients-records.php");
 	}
 }
 ?>
