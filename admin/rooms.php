@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 	header("Location: ../index.php");
@@ -7,17 +7,22 @@ if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
 	<title>Rooms Admin Dashboard - HMS</title>
-	<link rel="stylesheet" type="text/css" href="../assets/style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- <link rel="stylesheet" type="text/css" href="../assets/style.css"> -->
 </head>
 <body>
-	<div class="wrapper">
+	
 	<?php
 		include "includes/header.php";
 		include "includes/left.php";
 	 ?>
-		<div class="right"><br>
+		<div id="content" class="p-4 p-md-5 pt-5"><br>
 			<a href="addroom.php" style="margin-left:10px;"><button class="btnlink">Add Room</button></a><br>
 			<table class="table">
 				<tr>
@@ -27,13 +32,13 @@ if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 					<th>Edit</th>
 					<th>Delete</th>
 				</tr>
-				<?php 
+				<?php
 				require '../includes/admin.php';
 				rooms();
 				 ?>
 			</table>
 		</div>
-		<?php 
+		<?php
 		include "includes/footer.php";
 		 ?>
 	</div>

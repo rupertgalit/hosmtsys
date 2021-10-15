@@ -7,17 +7,22 @@ if (empty($_SESSION['pharmacy']) OR empty($_SESSION['type'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
 	<title>Pharmatist Dashboard - HMS</title>
-	<link rel="stylesheet" type="text/css" href="../assets/style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- <link rel="stylesheet" type="text/css" href="../assets/style.css"> -->
 </head>
 <body>
-	<div class="wrapper">
+
 	<?php
 		include "includes/header.php";
 		include "includes/left.php";
 	 ?>
-		<div class="right">
+		<div id="content" class="p-4 p-md-5 pt-5">
 			<br><form action="search.php" method="get" style="float:left;margin-left:15px;"><input type="text" style="height:25px; width:180px;padding-left:15px;" name="s" placeholder="Search Patient By ID"></form><br><br>
 			<table class="table" style="width:98% !important;">
 				<tr>

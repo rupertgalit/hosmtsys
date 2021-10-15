@@ -7,9 +7,14 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
 	<title>Doctor Dashboard - HMS</title>
-	<link rel="stylesheet" type="text/css" href="../assets/style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- <link rel="stylesheet" type="text/css" href="../assets/style.css"> -->
 	<style type="text/css">
 	.statistics{
 		width:70%;
@@ -28,13 +33,15 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 		</style>
 </head>
 <body>
-	<div class="wrapper">
+
 	<?php
 		include "includes/header.php";
 		include "includes/left.php";
 	 ?>
-		<div class="right">
+		<div id="content" class="p-4 p-md-5 pt-5">
+
 		<div class="statistics">
+			
 			<h4 align="center">My Patients Statistics</h4><hr>
 			<p><b>Today:</b> <?php
 			require_once "../includes/connect.php";
@@ -87,6 +94,7 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 					echo mysqli_error($con);
 				}
 			?> Patients</p>
+
 		</div>
 		<center><br>
 			<form action="reports.php" method="POST">

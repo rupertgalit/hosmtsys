@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 	header("Location: ../index.php");
@@ -7,17 +7,22 @@ if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
 	<title>Add User - HMS</title>
-	<link rel="stylesheet" type="text/css" href="../assets/style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- <link rel="stylesheet" type="text/css" href="../assets/style.css"> -->
 </head>
 <body>
-	<div class="wrapper">
+
 	<?php
 		include "includes/header.php";
 		include "includes/left.php";
 	 ?>
-		<div class="right"><br>
+		<div id="content" class="p-4 p-md-5 pt-5"><br>
 			<a href="users.php" style="margin-left:10px;"><button class="btnlink">View Users</button></a><br>
 			<center>
 				<form action="adduser.php" method="POST">
@@ -38,7 +43,7 @@ if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 				<input type="password" name="password" class="form" placeholder="Enter Password" required="required"><br><br>
 				<input type="submit" value="Add" class="btnlink" name="btn">
 			</form>
-			<?php 
+			<?php
 			extract($_POST);
 			if (isset($btn) && !empty($username) && !empty($password) &&!empty($type)) {
 				require "../includes/admin.php";
@@ -46,9 +51,9 @@ if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 			}
 			 ?>
 			</center>
-			
+
 		</div>
-		<?php 
+		<?php
 		include "includes/footer.php";
 		 ?>
 	</div>

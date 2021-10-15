@@ -296,7 +296,7 @@ function assigntodoctor()
 	if ($doctor=="WomenDoctor") {
 		$price = 0;
 
-				$sql = "INSERT INTO `medication` VALUES (null,'$id','REQDOC','','','','','$doctor','$price','$test_price','$medical_price','$day','$month','$year')";
+				$sql = "INSERT INTO `medication` VALUES (null,'$id','recdoctor','','','','','$doctor','$price','$test_price','$medical_price','$day','$month','$year')";
 
 			$query = mysqli_query($con,$sql);
 			if (!empty($query)) {
@@ -354,7 +354,7 @@ function assigntodoctor()
 	elseif ($doctor=="NormalDoctor") {
 		$price = 0;
 
-				$sql = "INSERT INTO `medication` VALUES (null,'$id','REQDOC','','','','','$doctor','$price','$test_price','$medical_price','$day','$month','$year')";
+				$sql = "INSERT INTO `medication` VALUES (null,'$id','recdoctor','','','','','$doctor','$price','$test_price','$medical_price','$day','$month','$year')";
 
 			$query = mysqli_query($con,$sql);
 			if (!empty($query)) {
@@ -411,7 +411,7 @@ function assigntodoctor()
 	elseif ($doctor=="DentalDoctor") {
 		$price = 0;
 
-				$sql = "INSERT INTO `medication` VALUES (null,'$id','REQDOC','','','','','$doctor','$price','$test_price','$medical_price','$day','$month','$year')";
+				$sql = "INSERT INTO `medication` VALUES (null,'$id','recdoctor','','','','','$doctor','$price','$test_price','$medical_price','$day','$month','$year')";
 
 			$query = mysqli_query($con,$sql);
 			if (!empty($query)) {
