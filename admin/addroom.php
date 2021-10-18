@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 	header("Location: ../index.php");
@@ -10,11 +10,12 @@ if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 	<meta charset="UTF-8">
 	<title>Add A Room - HMS</title>
 	<link rel="stylesheet" type="text/css" href="../assets/style.css">
+
 </head>
 <body>
 	<div class="wrapper">
 	<?php
-		include "includes/header.php";
+		
 		include "includes/left.php";
 	 ?>
 		<div class="right"><br>
@@ -25,7 +26,7 @@ if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 				<input type="text" name="name" class="form" placeholder="Enter Room Name" required="required"><br><br>
 				<input type="submit" value="Add" class="btnlink" name="btn">
 			</form>
-			<?php 
+			<?php
 			extract($_POST);
 			if (isset($btn) && !empty($number) && !empty($name)) {
 				require "../includes/admin.php";
@@ -33,11 +34,13 @@ if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 			}
 			 ?>
 			</center>
-			
+
 		</div>
-		<?php 
-		include "includes/footer.php";
-		 ?>
+
 	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>

@@ -14,16 +14,25 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/style.css">
 
+	<style type="text/css">
+
+	#content{
+		background-image : url('css/img/med_bg.jpg');
+		background-repeat: no-repeat;
+		background-size: cover;
+		color: rgb(0, 2, 45);
+	}
+	</style>
 	<!-- <link rel="stylesheet" type="text/css" href="../assets/style.css"> -->
 </head>
 <body>
 
 	<?php
-		include "includes/header.php";
+
 		include "includes/left.php";
 	 ?>
 		<div id="content" class="p-4 p-md-5 pt-5">
-			<a href="patients.php" style="margin-left:10px;"><button class="btnlink">View Patients</button></a><form action="search.php" method="get" style="float:right;margin-right:15px;"><input name="s" type="text" style="height:25px; width:180px;padding-left:15px;" placeholder="Search Patient By Firstname"></form><br><br>
+			<a href="patients.php" style="margin-left:10px;"><button class="btnlink">View Patients</button></a><br><br>
 			<?php $id = $_GET['id']; ?>
 			<center>
 				<form action="editpatient.php?id=<?php echo $id; ?>" method="POST">
@@ -117,9 +126,11 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 			</center>
 
 		</div>
-		<?php
-		include "includes/footer.php";
-		 ?>
+
 	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>

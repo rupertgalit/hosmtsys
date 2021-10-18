@@ -22,7 +22,7 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 
 	<style type="text/css">
 	.total{
-		height: 120px;
+		height: 200px;
 		width: 170px;
 		border: 1px solid #408080;
 		margin-top: 5px;
@@ -31,6 +31,13 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 		text-align: center;
 		padding-top: 20px;
 	}
+
+	#content{
+		background-image : url('css/img/med_bg.jpg');
+		background-repeat: no-repeat;
+	  background-size: cover;
+		color: rgb(0, 2, 45);
+	}
 	</style>
 </head>
 <body>
@@ -38,12 +45,18 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 
 
 	<?php
-		
+
 		include "includes/left.php";
 	 ?>
 
-<div id="content" class="p-4 p-md-5 pt-5">
-			Welcome, <b>Receptionist</b><br><br>
+<div id="content" class="p-4 p-md-5 pt-5"  >
+		 	<b>
+				<?php
+				require '../includes/connect.php';
+				require '../includes/users.php';
+				receptiondetails();
+				 ?>
+			</b><br><br>
 			In your Dashboard you can do the following jobs,<br><br>
 			<ol>
 				<li>Add Patients</li><br>
@@ -52,24 +65,20 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 				<li>Search Patients</li><br>
 			</ol>
 
-
+			<div class="total">
 				<b>Total Patients</b><hr>
 				<?php
 				require_once "../includes/connect.php";
 
-				$sql = "SELECT * FROM `patient`";
+				$sql = "SELECT * FROM `assigned_patient`";
 				$query = mysqli_query($con,$sql);
 				echo "<br><b style='color:#408080; font-family:Arial; font-size:35px;'>".$row = mysqli_num_rows($query)."</b>";
 				 ?>
-
+			 </div>
 </div>
-
 		<script src="js/jquery.min.js"></script>
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
-
-
-
 </body>
 </html>

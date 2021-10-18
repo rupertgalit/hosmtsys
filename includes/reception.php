@@ -31,12 +31,12 @@ function patients_records()
 		echo "<td>P-".$row['patient_id']."</td>";
 		echo "<td>".$row['fname']."</td>";
 		echo "<td>".$row['sname']."</td>";
-		echo "<td>".$row['phone']."</td>";
+		echo "<td>(+63)".$row['phone']."</td>";
 		echo "<td>".$row['sex']."</td>";
 		echo "<td>".$row['birthyear']."</td>";
 		echo "<td><center><a href='viewpatient-records.php?patient_id=".$row['patient_id']."'>View</a></center></td>";
-		echo "<td><center><a href='editpatient.php?id=".$row['id']."'><img src='../assets/img/glyphicons-151-edit.png' height='16px' width='17px'></a></center></td>";
-		echo "<td><center><a href='deletepatient.php?id=".$row['id']."'><img src='../assets/img/glyphicons-17-bin.png' height='16px' width='12px'></a></center></td>";
+		echo "<td><center><a href='editpatient-records.php?patient_id=".$row['patient_id']."'><img src='../assets/img/glyphicons-151-edit.png' height='16px' width='17px'></a></center></td>";
+		echo "<td><center><a href='deletepatient-records.php?patient_id=".$row['patient_id']."'><img src='../assets/img/glyphicons-17-bin.png' height='16px' width='12px'></a></center></td>";
 		echo "</tr>";
 	}
 }
@@ -254,6 +254,26 @@ function searchpatients()
 	}
 }
 
+function searchpatients_records()
+{
+	require 'connect.php';
+	$sachi = $_GET['s'];
+	$sql = "SELECT * FROM `assigned_patient` WHERE `patient_id` LIKE '%$sachi%'";
+	$query = mysqli_query($con,$sql);
+	while ($row = mysqli_fetch_array($query)) {
+		echo "<tr height=30px'>";
+		echo "<td>P-".$row['patient_id']."</td>";
+		echo "<td>".$row['fname']."</td>";
+		echo "<td>".$row['sname']."</td>";
+		echo "<td>".$row['phone']."</td>";
+		echo "<td>".$row['sex']."</td>";
+		echo "<td><center><a href='viewpatient-records.php?patient_id=".$row['patient_id']."'>View</a></center></td>";
+		echo "<td><center><a href='editpatient-records.php?patient_id=".$row['patient_id']."'><img src='../assets/img/glyphicons-151-edit.png' height='16px' width='17px'></a></center></td>";
+		echo "<td><center><a href='deletepatient-records.php?patient_id=".$row['patient_id']."'><img src='../assets/img/glyphicons-17-bin.png' height='16px' width='12px'></a></center></td>";
+		echo "</tr>";
+	}
+}
+
 
 function addpatient()
 {
@@ -359,6 +379,9 @@ function assigntodoctor()
 			$query = mysqli_query($con,$sql);
 			if (!empty($query)) {
 				echo "<br><b style='color:#008080;font-size:14px;font-family:Arial;'>Patient is Succesifully Assigned To Doctor</b><br><br>";
+
+
+
 			}
 			else{
 				echo mysqli_error($con);
@@ -366,9 +389,9 @@ function assigntodoctor()
 
 			$id = $_GET['id'];
 			require 'connect.php';
-			$sql2 = "SELECT * FROM `patient` WHERE `id`='$id'";
-			$query2 = mysqli_query($con,$sql2);
-			while ($row = mysqli_fetch_array($query2)) {
+			$sql = "SELECT * FROM `patient` WHERE `id`='$id'";
+			$query = mysqli_query($con,$sql);
+			while ($row = mysqli_fetch_array($query)) {
 
 			$id = $row['id'];
 			$fname = $row['fname'];
@@ -385,28 +408,24 @@ function assigntodoctor()
 
 			$query2 = mysqli_query($con,$sql2);
 			if (!empty($query2)) {
-			echo "<br><b style='color:#008080;font-size:14px;font-family:Arial;'>Patient is Succesifully Assigned To Doctor</b><br><br>";
+
 			}
 			else{
 			echo mysqli_error($con);
 			}
-
 			}
 
-			session_start();
-			if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
-				header("Location: ../index.php");
-			}
-			else{
 				$id = $_GET['id'];
 
 				require_once "../includes/connect.php";
 				$sql3 = "DELETE FROM `patient` WHERE `id`='$id'";
 				$query3 = mysqli_query($con,$sql3);
 				if (!empty($query3)) {
-					header("Location: patients.php");
 				}
-			}
+
+
+
+
 	}
 	elseif ($doctor=="DentalDoctor") {
 		$price = 0;
@@ -494,6 +513,35 @@ function updatepatient()
 		echo mysqli_error($con);
 	}
 }
+
+
+function updatepatient_records()
+{
+	$id = $_GET['patient_id'];
+	$fname = trim(htmlspecialchars($_POST['fname']));
+	$sname = trim(htmlspecialchars($_POST['sname']));
+	$email = trim(htmlspecialchars($_POST['email']));
+	$phone = trim(htmlspecialchars($_POST['phone']));
+	$address = trim(htmlspecialchars($_POST['address']));
+	$gender = trim(htmlspecialchars($_POST['gender']));
+	$birthyear = trim(htmlspecialchars($_POST['birthyear']));
+	$bloodgroup = trim(htmlspecialchars($_POST['bloodgroup']));
+
+	require_once "connect.php";
+	include "connect.php";
+
+	$sql = "UPDATE `assigned_patient` SET `fname`='$fname',`sname`='$sname',`email`='$email',`address`='$address',`phone`='$phone',`sex`='$gender',`bloodgroup`='$bloodgroup',`birthyear`='$birthyear' WHERE `patient_id`='$id'";
+	//$sql = "INSERT INTO `` VALUES ('','$fname','$sname','$email','$address','$phone','$gender','$bloodgroup','$birthyear')";
+	$query = mysqli_query($con,$sql);
+	if (!empty($query)) {
+		echo "<br><b style='color:#008080;font-size:14px;font-family:Arial;'>Patient is Succesifully Updated</b><br><br>";
+	}
+	else{
+		echo mysqli_error($con);
+	}
+}
+
+
 
 function settings()
 {

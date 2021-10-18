@@ -27,12 +27,30 @@ if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 		text-align: center;
 		padding-top: 20px;
 	}
+
+	a{
+		text-decoration: none;
+		color: #408080;
+		}a:hover{
+			text-decoration: underline;
+		}
+		#content{
+			background-image : url('css/img/med_bg.jpg');
+			background-repeat: no-repeat;
+		  background-size: cover;
+			color: rgb(1, 11, 232);
+		}
+		td,th{
+			text-align: center;
+		}
+
+
 	</style>
 </head>
 <body>
 	<
 	<?php
-		include "includes/header.php";
+
 		include "includes/left.php";
 	 ?>
 		<div id="content" class="p-4 p-md-5 pt-5">
@@ -103,9 +121,11 @@ if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 				 ?>
 			</div>
 		</div>
-		<?php
-		include "includes/footer.php";
-		 ?>
+
 	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>

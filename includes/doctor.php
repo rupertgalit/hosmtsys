@@ -121,12 +121,13 @@ function addsymptoms()
 function addmedicine()
 {
 	$medicine = trim(htmlspecialchars($_POST['medicine']));
+	$doctorsfee = trim(htmlspecialchars($_POST['doctorsfee']));
 	if (!empty($medicine)) {
 		$id = $_GET['id'];
 		@require_once "connect.php";
 		include "connect.php";
 
-		$sql = "UPDATE `medication` SET `status`='pharmacy',`medical`='$medicine' WHERE `id`='$id'";
+		$sql = "UPDATE `medication` SET `status`='pharmacy',`medical`='$medicine', `doctor_price`='$doctorsfee' WHERE `id`='$id'";
 		$query = mysqli_query($con,$sql);
 		if (!empty($query)) {
 			echo "<br><b style='color:#008080;font-size:14px;font-family:Arial;'>Succesifully Sent</b>";

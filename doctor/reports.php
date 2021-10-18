@@ -14,6 +14,24 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/style.css">
 
+	<style type="text/css">
+	a{
+		text-decoration: none;
+		color: #408080;
+		}a:hover{
+			text-decoration: underline;
+		}
+		#content{
+			background-image : url('css/img/med_bg.jpg');
+			background-repeat: no-repeat;
+		  background-size: cover;
+			color: rgb(1, 11, 232);
+		}
+		td,th{
+			text-align: center;
+		}
+
+		</style>
 	<!-- <link rel="stylesheet" type="text/css" href="../assets/style.css"> -->
 	<style type="text/css">
 	.statistics{
@@ -41,7 +59,7 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 		<div id="content" class="p-4 p-md-5 pt-5">
 
 		<div class="statistics">
-			
+
 			<h4 align="center">My Patients Statistics</h4><hr>
 			<p><b>Today:</b> <?php
 			require_once "../includes/connect.php";
@@ -192,9 +210,11 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 
 
 		</div>
-		<?php
-		include "includes/footer.php";
-		 ?>
+	
 	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>

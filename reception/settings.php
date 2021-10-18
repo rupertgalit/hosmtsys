@@ -14,6 +14,15 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/style.css">
 
+	<style type="text/css">
+		#content{
+			background-image : url('css/img/med_bg.jpg');
+			background-repeat: no-repeat;
+			background-size: cover;
+			color: rgb(1, 11, 232);
+		}
+
+		</style>
 	<!-- <link rel="stylesheet" type="text/css" href="../assets/style.css"> -->
 </head>
 <body>
@@ -67,9 +76,11 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 			 ?>
 			</center>
 			</div>
-		<?php
-		include "includes/footer.php";
-		 ?>
+
+		 <script src="js/jquery.min.js"></script>
+	 	<script src="js/popper.js"></script>
+	 	<script src="js/bootstrap.min.js"></script>
+	 	<script src="js/main.js"></script>
 
 
 </body>

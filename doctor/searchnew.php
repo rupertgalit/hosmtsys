@@ -10,6 +10,24 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 	<title>Search Patient - HMS</title>
 	<meta charset="UTF-8">
 
+	<style type="text/css">
+	a{
+		text-decoration: none;
+		color: #408080;
+		}a:hover{
+			text-decoration: underline;
+		}
+		#content{
+			background-image : url('css/img/med_bg.jpg');
+			background-repeat: no-repeat;
+		  background-size: cover;
+			color: rgb(1, 11, 232);
+		}
+		td,th{
+			text-align: center;
+		}
+
+		</style>
 	<!-- <link rel="stylesheet" type="text/css" href="../assets/style.css"> -->
 </head>
 <body>
@@ -38,5 +56,9 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 		include "includes/footer.php";
 		 ?>
 	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>

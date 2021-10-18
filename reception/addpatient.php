@@ -16,11 +16,21 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 	<link rel="stylesheet" href="css/style.css">
 
 	<!-- <link rel="stylesheet" type="text/css" href="../assets/style.css"> -->
+<style type="text/css">
+
+	#content{
+		background-image : url('css/img/med_bg.jpg');
+		background-repeat: no-repeat;
+	  background-size: cover;
+		color: rgb(0, 2, 45);
+	}
+	</style>
+
 </head>
 <body>
 
 	<?php
-		include "includes/header.php";
+
 		include "includes/left.php";
 	 ?>
 		<div id="content" class="p-4 p-md-5 pt-5"><br>
@@ -31,7 +41,7 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 				<input type="text" name="fname" class="form" placeholder="Enter Firstname" required="required"><br><br>
 				<input type="text" name="sname" class="form" placeholder="Enter Surname" required="required"><br><br>
 				<input type="email" name="email" class="form" placeholder="Enter Email" required="required"><br><br>
-				<input type="number" name="phone" class="form" placeholder="Enter Phone number" required="required"><br><br>
+				<input type="number" name="phone" class="form" placeholder="(+63) Enter Phone number" required="required" min="0800000000" maxlength="0999999999"  ><br><br>
 				<input type="text" name="address" class="form" placeholder="Enter Address" required="required"><br><br>
 				<select name="gender" class="form" required="required">
 					<option value="">Choose Gender</option>
@@ -108,9 +118,11 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 			</center>
 
 		</div>
-		<?php
-		include "includes/footer.php";
-		 ?>
+		
 	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>

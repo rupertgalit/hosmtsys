@@ -14,6 +14,21 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/style.css">
 
+	<style type="text/css">
+		#content{
+			background-image : url('css/img/med_bg.jpg');
+			background-repeat: no-repeat;
+			background-size: cover;
+			color: rgb(1, 11, 232);
+		}
+		#table-center{
+			display: flex;
+			justify-content: center;
+		}
+		td,th,table{
+			text-align: center;
+		}
+		</style>
 	<!-- <link rel="stylesheet" type="text/css" href="../assets/style.css"> -->
 </head>
 <body>
@@ -26,12 +41,14 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 		<div class="right"><br>
 			<!-- <a href="addpatient.php" style="margin-left:10px;" style="float:left;"><button class="btnlink">Add Patient</button></a><form action="search.php" method="get" style="float:right;margin-right:15px;"><input type="text" style="height:25px; width:180px;padding-left:15px;" name="s" placeholder="Search Patient By ID"></form><br> -->
 			<Center><h1> PATIENT'S STATUS </h1></Center>
-			<table class="table" style="width:80% !important;">
+			<div id="table-center">
+			<table class="table" style="width:50% !important;">
 			<?php
 				require '../includes/reception.php';
 				viewpatients_status();
 				 ?>
 			</table><br><br>
+		</div>
 
 				<!-- <a href="addpatient.php" style="margin-left:190px;" style="float:left;"><button class="btnlink">Patient Status</button></a><form action="search.php" method="get" style="float:right;margin-right:15px;">
 				<a href="addpatient.php" style="margin-right:190px;" style="float:left;"><button class="btnlink">Bills Details</button></a><form action="search.php" method="get" style="float:right;margin-right:40px;"> -->
@@ -72,9 +89,11 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 
 			</center>
 		</div>
-		<?php
-		include "includes/footer.php";
-		 ?>
+		
 	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>
