@@ -37,7 +37,6 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 <body>
 
 	<?php
-		include "includes/header.php";
 		include "includes/left.php";
 	 ?>
 		<div id="content" class="p-4 p-md-5 pt-5">

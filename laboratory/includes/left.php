@@ -26,7 +26,8 @@
 	        </button>
         </div>
 
-	  		<h1><a href="index.php" class="logo">HMS</a></h1>
+	  		<h1><a href="index.php" class="logo">
+				<img class="mb-1" src="../assets/brand/HMSlogo.png" alt="" width="170" height="60" padding-bottom="5px" shadow=" 10px 10px 5px grey" background-color="black"></a></h1>
         <ul class="list-unstyled components mb-5">
           <li class="active">
             <a href="index.php"><span class="fa fa-home mr-3"></span> Homepage</a>
@@ -49,7 +50,7 @@
             <a href="settings.php"><span class="fa fa-cog mr-3"></span> Settings</a>
           </li>
           <li>
-            <a href=""><span class=""></span></a>
+            <a href="../logout.php"><span class="fa fa-power-off mr-3"></span> Logout</a>
           </li>
           <li>
 

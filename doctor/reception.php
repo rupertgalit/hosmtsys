@@ -46,7 +46,7 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 			<br><form action="search.php" method="get" style="float:left;margin-left:15px;"><input type="text" style="height:25px; width:180px;padding-left:15px;" name="s" placeholder="Search Patient By ID"></form><br><br>
 			<table class="table" style="width:98% !important;">
 				<tr>
-					<th>ID</th>
+					<th>Patient ID</th>
 					<th>Firstname</th>
 					<th>Surname</th>
 					<th>Gender</th>
@@ -58,7 +58,7 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 				 ?>
 			</table>
 		</div>
-	
+
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/popper.js"></script>

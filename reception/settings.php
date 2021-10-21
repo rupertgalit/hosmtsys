@@ -42,6 +42,7 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 			<center>
 			<br><br>
 
+				<center><h3> Settings </h3></center><br><br>
 				<form action="settings.php" method="POST">
 				<input type="text" name="username" class="form" value="<?php echo $name; ?>" required="required" disabled="disabled"><br><br>
 

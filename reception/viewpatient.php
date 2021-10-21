@@ -45,7 +45,20 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 				require '../includes/reception.php';
 				viewpatient();
 				 ?>
-			</table><br><br>
+			</table>
+			<?php
+			include "../includes/connect.php";
+			$id = $_GET['id'];
+			require '../includes/connect.php';
+
+			$sql = "SELECT * FROM `patient` WHERE `id`='$id'";
+			$query = mysqli_query($con,$sql);
+			while ($row = mysqli_fetch_array($query)) {
+				echo $row['image'];
+			}
+
+			?>
+			<br><br>
 		</div>
 			<center>
 				<form action="viewpatient.php?id=<?php echo $id = $_GET['id']; ?>" method="post">
@@ -62,13 +75,8 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 			if (isset($btn)&&!empty($doctor)) {
 
 			 	assigntodoctor();
-
 			 }
-
 			 ?>
-			 <p id = "msg"></p>;
-
-
 			 <br><br>
 			</center>
 

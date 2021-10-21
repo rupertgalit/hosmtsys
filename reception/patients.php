@@ -45,6 +45,7 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 	 ?>
 	 <div id="content" class="p-4 p-md-5 pt-5">
 
+		 	<center><h3> New Patient </h3></center>
 			<a href="addpatient.php" style="margin-left:10px;" style="float:left;"><button class="btnlink">Add Patient</button></a><form action="search.php" method="get" style="float:right;margin-right:15px;"><input type="text" style="height:25px; width:180px;padding-left:15px;" name="s" placeholder="Search Patient By ID"></form><br><br>
 			<table class="table" style="width:98% !important;">
 				<tr>
@@ -63,7 +64,7 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 				 ?>
 			</table>
 
-		
+
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/popper.js"></script>

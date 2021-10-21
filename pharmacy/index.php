@@ -42,14 +42,18 @@ if (empty($_SESSION['pharmacy']) OR empty($_SESSION['type'])) {
 	 ?>
 		<div id="content" class="p-4 p-md-5 pt-5"  >
 			<div style="padding-left:20px;padding-top:20px;">
-			<b>
+				<center>
+				<br><br>
+				<br><br>
+			 	<h3>
 				<?php
 				require '../includes/connect.php';
 				require '../includes/users.php';
 				pharmacydetails();
 				 ?>
-			</b><br><br>
-			In your Dashboard you can do the following jobs,<br><br>
+			</h3><br><br>
+			<br><br>
+			<!-- In your Dashboard you can do the following jobs,<br><br>
 			<ol>
 				<li>View Suggested Medicine</li><br>
 				<li>Add Medicine</li><br>
@@ -57,7 +61,7 @@ if (empty($_SESSION['pharmacy']) OR empty($_SESSION['type'])) {
 				<li>Delete Medicine</li><br>
 				<li>Add Medicine Price</li><br>
 				<li>Search Medicine</li><br>
-			</ol>
+			</ol> -->
 		</div>
 		</div>
 

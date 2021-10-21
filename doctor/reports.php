@@ -53,7 +53,6 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 <body>
 
 	<?php
-		include "includes/header.php";
 		include "includes/left.php";
 	 ?>
 		<div id="content" class="p-4 p-md-5 pt-5">
@@ -171,6 +170,7 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 			<option>2018</option>
 			<option>2019</option>
 			<option>2020</option>
+			<option>2021</option>
 			</select>&nbsp;&nbsp;<input type="submit" value="View Report" class="btnlink">
 		</form><br>
 		<?php
@@ -210,7 +210,7 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 
 
 		</div>
-	
+
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/popper.js"></script>

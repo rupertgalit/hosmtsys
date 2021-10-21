@@ -23,11 +23,10 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 	<style type="text/css">
 	.total{
 		height: 200px;
-		width: 170px;
+		width: 200px;
 		border: 1px solid #408080;
 		margin-top: 5px;
-		margin-bottom: 5px;
-		margin-left: 30%;
+
 		text-align: center;
 		padding-top: 20px;
 	}
@@ -49,21 +48,26 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 		include "includes/left.php";
 	 ?>
 
+
 <div id="content" class="p-4 p-md-5 pt-5"  >
-		 	<b>
+	<center>
+			<br><br>
+			<br><br>
+		 	<h3>
 				<?php
 				require '../includes/connect.php';
 				require '../includes/users.php';
 				receptiondetails();
 				 ?>
-			</b><br><br>
-			In your Dashboard you can do the following jobs,<br><br>
-			<ol>
-				<li>Add Patients</li><br>
-				<li>Edit Patients</li><br>
-				<li>Delete Patients</li><br>
-				<li>Search Patients</li><br>
-			</ol>
+			</h3><br><br>
+			<br><br>
+			<!-- In your Dashboard you can do the following jobs,<br><br> -->
+
+				<!-- <h3>Add Patients</h3>
+				<h3>Edit Patients</h3>
+				<h3>Delete Patients</h3>
+				<h3>Search Patients</h3> -->
+
 
 			<div class="total">
 				<b>Total Patients</b><hr>
@@ -75,7 +79,9 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 				echo "<br><b style='color:#408080; font-family:Arial; font-size:35px;'>".$row = mysqli_num_rows($query)."</b>";
 				 ?>
 			 </div>
+			 </center>
 </div>
+
 		<script src="js/jquery.min.js"></script>
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>

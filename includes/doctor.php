@@ -12,7 +12,7 @@ function recdoctor()
 		$query2 = mysqli_query($con,$sql2);
 		while ($row2 = mysqli_fetch_array($query2)) {
 			echo "<tr height=30px'>";
-			echo "<td>".$row2['id']."</td>";
+			echo "<td>".$row2['patient_id']."</td>";
 			echo "<td>".$row2['fname']."</td>";
 			echo "<td>".$row2['sname']."</td>";
 			echo "<td>".$row2['sex']."</td>";
@@ -36,7 +36,7 @@ function labdoctor()
 		$query2 = mysqli_query($con,$sql2);
 		while ($row2 = mysqli_fetch_array($query2)) {
 			echo "<tr height=30px'>";
-			echo "<td>P-".$row2['id']."</td>";
+			echo "<td>P-".$row2['patient_id']."</td>";
 			echo "<td>".$row2['fname']."</td>";
 			echo "<td>".$row2['sname']."</td>";
 			echo "<td>".$row2['sex']."</td>";
@@ -61,7 +61,7 @@ function searchpatients()
 				$query2 = mysqli_query($con,$sql2);
 		while ($row2 = mysqli_fetch_array($query2)) {
 			echo "<tr height=30px'>";
-			echo "<td>P-".$row2['id']."</td>";
+			echo "<td>P-".$row2['patient_id']."</td>";
 			echo "<td>".$row2['fname']."</td>";
 			echo "<td>".$row2['sname']."</td>";
 			echo "<td>".$row2['sex']."</td>";
@@ -85,7 +85,7 @@ function searchnewpatients()
 				$query2 = mysql_query($sql2);
 		while ($row2 = mysql_fetch_array($query2)) {
 			echo "<tr height=30px'>";
-			echo "<td>P-".$row2['id']."</td>";
+			echo "<td>P-".$row2['patient_id']."</td>";
 			echo "<td>".$row2['fname']."</td>";
 			echo "<td>".$row2['sname']."</td>";
 			echo "<td>".$row2['sex']."</td>";

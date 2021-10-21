@@ -106,7 +106,9 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 					<option>1971</option>
 					<option>1970</option>
 				</select><br><br>
+				<input type="file" name="imgfile" class="form" placeholder="" required="required"><br><br>
 				<input type="submit" value="Add" class="btnlink" name="btn"><br><br>
+
 			</form>
 			<?php
 			extract($_POST);
@@ -118,7 +120,7 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 			</center>
 
 		</div>
-		
+
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/popper.js"></script>

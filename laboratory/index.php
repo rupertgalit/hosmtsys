@@ -42,22 +42,26 @@ if (empty($_SESSION['laboratory']) OR empty($_SESSION['type'])) {
 	 ?>
 		<div id="content" class="p-4 p-md-5 pt-5">
 			<div style="padding-left:20px;padding-top:20px;">
-			Welcome, <b>
+				<center>
+						<br><br>
+						<br><br>
+					 	<h3>
 				<?php
 				require '../includes/connect.php';
 				require '../includes/users.php';
 				laboratorydetails();
 				 ?>
 			</b><br><br>
-			In your Dashboard you can do the following jobs,<br><br>
+			<!-- In your Dashboard you can do the following jobs,<br><br>
 			<ol>
 				<li>View Test Suggestions</li><br>
 				<li>Add Price for Test</li><br>
 				<li>Enter Test Result</li><br>
 				<li>Add & View Results</li><br>
 				<li>Search Patient</li><br>
-			</ol>
+			</ol> -->
 		</div>
+	</center>
 		</div>
 
 	</div>

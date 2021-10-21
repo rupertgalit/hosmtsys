@@ -17,6 +17,7 @@ function patients()
 		echo "<td><center><a href='deletepatient.php?id=".$row['id']."'><img src='../assets/img/glyphicons-17-bin.png' height='16px' width='12px'></a></center></td>";
 		echo "</tr>";
 	}
+
 }
 
 function patients_records()
@@ -34,7 +35,7 @@ function patients_records()
 		echo "<td>(+63)".$row['phone']."</td>";
 		echo "<td>".$row['sex']."</td>";
 		echo "<td>".$row['birthyear']."</td>";
-		echo "<td><center><a href='viewpatient-records.php?patient_id=".$row['patient_id']."'>View</a></center></td>";
+		echo "<td><center><a href='profile.php?patient_id=".$row['patient_id']."'>View</a></center></td>";
 		echo "<td><center><a href='editpatient-records.php?patient_id=".$row['patient_id']."'><img src='../assets/img/glyphicons-151-edit.png' height='16px' width='17px'></a></center></td>";
 		echo "<td><center><a href='deletepatient-records.php?patient_id=".$row['patient_id']."'><img src='../assets/img/glyphicons-17-bin.png' height='16px' width='12px'></a></center></td>";
 		echo "</tr>";
@@ -192,6 +193,8 @@ function viewpatient()
 	while ($row = mysqli_fetch_array($query)) {
 		$year = date('Y') - $row['birthyear'];
 		echo "
+
+
 		<tr style='height:40px;'>
 				<td style='width:40%;padding-left:20px;'><b>ID</b></td>
 				<td>".$row['id']."</td>
@@ -228,6 +231,8 @@ function viewpatient()
 				<td style='width:40%;padding-left:20px;'><b>YEARS</b></td>
 				<td>".$year."</td>
 			</tr>
+
+
 		";
 
 	}
@@ -285,11 +290,12 @@ function addpatient()
 	$gender = trim(htmlspecialchars($_POST['gender']));
 	$birthyear = trim(htmlspecialchars($_POST['birthyear']));
 	$bloodgroup = trim(htmlspecialchars($_POST['bloodgroup']));
+	$image = $_POST['imgfile'];
 
 	require_once "connect.php";
 	include "connect.php";
 
-	$sql = "INSERT INTO `patient` VALUES (null,'$fname','$sname','$email','$address','$phone','$gender','$bloodgroup','$birthyear')";
+	$sql = "INSERT INTO `patient` VALUES (null,'$fname','$sname','$email','$address','$phone','$gender','$bloodgroup','$birthyear','$image')";
 	$query = mysqli_query($con,$sql);
 	if (!empty($query)) {
 		echo "<br><b style='color:#008080;font-size:14px;font-family:Arial;'>Patient is Succesifully Added</b><br><br>";

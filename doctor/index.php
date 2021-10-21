@@ -37,25 +37,27 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 <body>
 
 	<?php
-
 		include "includes/left.php";
 	 ?>
 		<div id="content" class="p-4 p-md-5 pt-5">
-
-			<b>
+			<center>
+			<br><br>
+			<br><br>
+			<h3>
 				<?php
 				require '../includes/connect.php';
 				require '../includes/users.php';
 				doctordetails();
 				 ?>
 
-			</b><br><br>
-			In your Dashboard you can do the following jobs,<br><br>
+			</h3><br><br>
+		</center>
+			<!-- In your Dashboard you can do the following jobs,<br><br>
 			<ol>
 				<li>Add Symptoms to Patient</li><br>
 				<li>View Patient Test Result</li><br>
 				<li>Suggest Medicine</li><br>
-			</ol>
+			</ol> -->
 		</div>
 		<script src="js/jquery.min.js"></script>
 		<script src="js/popper.js"></script>

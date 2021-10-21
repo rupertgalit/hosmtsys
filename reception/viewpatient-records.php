@@ -20,10 +20,27 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 			background-repeat: no-repeat;
 			background-size: cover;
 			color: rgb(1, 11, 232);
+
 		}
 		#table-center{
 			display: flex;
 			justify-content: center;
+			border-style:outset;
+			border-color:rgb(143, 155, 157);
+			width: 50%;
+			position:relative;
+			float: right;
+		}
+		#table-center2{
+			display: flex;
+			justify-content: center;
+			border-style:outset;
+			border-color:rgb(143, 155, 157);
+			width: 50%;
+			position: absolute;
+			float: left;
+
+
 		}
 		td,th,table{
 			text-align: center;
@@ -40,8 +57,9 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 	 <div id="content" class="p-4 p-md-5 pt-5">
 			<!-- <a href="addpatient.php" style="margin-left:10px;" style="float:left;"><button class="btnlink">Add Patient</button></a><form action="search.php" method="get" style="float:right;margin-right:15px;"><input type="text" style="height:25px; width:180px;padding-left:15px;" name="s" placeholder="Search Patient By ID"></form><br> -->
 			<Center><h1> PATIENT'S DETAILS </h1></Center><br><br>
+
 			<div id="table-center">
-			<table class="table" style="width:50% !important;">
+			<table class="table" style="width:60% !important;">
 			<?php
 				require '../includes/reception.php';
 				viewpatients_records();
@@ -49,6 +67,13 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 				 ?>
 			</table><br><br>
 		</div>
+		<div id="table-center2">
+		<table class="table" style="width:60% !important;">
+			<form>
+			<input type = "file" name="fileimg" class= "file_img">
+		</form>
+		</table><br><br>
+	</div>
 
 				<!-- <a href='viewpatient-status.php?patient_id=".$row['patient_id']."' style="margin-left:190px;" style="float:left;"><button class="btnlink">Patient Status</button></a><form action="search.php" method="get" style="float:right;margin-right:15px;">
 				<a href="addpatient.php" style="margin-right:190px;" style="float:left;"><button class="btnlink">Bills Details</button></a><form action="search.php" method="get" style="float:right;margin-right:40px;"> -->
@@ -81,13 +106,7 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 					<br><br>
 				</div>
 			</center>
-
-				<center>
-				<form >
-
-				</form>
-
-			</center>
+ </div>
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/popper.js"></script>

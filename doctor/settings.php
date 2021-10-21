@@ -37,7 +37,6 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 <body>
 
 	<?php
-		include "includes/header.php";
 		include "includes/left.php";
 	 ?>
 		<div id="content" class="p-4 p-md-5 pt-5">
@@ -82,9 +81,7 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 			 ?>
 			</center>
 			</div>
-		<?php
-		include "includes/footer.php";
-		 ?>
+		
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/popper.js"></script>
