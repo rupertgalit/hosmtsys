@@ -16,7 +16,7 @@ function recdoctor()
 			echo "<td>".$row2['fname']."</td>";
 			echo "<td>".$row2['sname']."</td>";
 			echo "<td>".$row2['sex']."</td>";
-			echo "<td><center><a href='addsymptoms.php?id=".$row['id']."'>Add</a></center></td>";
+			echo "<td><center><a href='profile.php?patient_id=".$row['patient_id']."'>Add</a></center></td>";
 			echo "</tr>";
 		}
 

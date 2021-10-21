@@ -379,8 +379,9 @@ function assigntodoctor()
 
 	elseif ($doctor=="NormalDoctor") {
 		$price = 0;
+		$rand = rand(10000,99999);
 
-				$sql = "INSERT INTO `medication` VALUES (null,'$id','recdoctor','','','','','$doctor','$price','$test_price','$medical_price','$day','$month','$year')";
+				$sql = "INSERT INTO `medication` VALUES (null,'$id','recdoctor','','','','','','','$doctor','$rand','$price','$test_price','$medical_price','$day','$month','$year')";
 
 			$query = mysqli_query($con,$sql);
 			if (!empty($query)) {

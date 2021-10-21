@@ -15,7 +15,7 @@
   <!--Only for demo purpose - no need to add.-->
   <link rel="stylesheet" href="css/profile-demo.css" />
 
-  <link rel="stylesheet" href="css/profile-style1.css">
+  <link rel="stylesheet" href="css/profile-style.css">
 
   <style>
 
@@ -72,7 +72,7 @@
       <div class="col-rt-12">
         <div class="head">
           <div class="head2">
-            <button onclick="location.href='patients-records.php'" type="button">
+            <button onclick="location.href='reception.php'" type="button">
               Back</button>
             </div>
       </div>
@@ -101,17 +101,17 @@
                         $day = date('d');
                     		$month = date('m');
                     		$year = date('Y');
-                        $rand = rand();
+
                       $sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id WHERE medication.patient_id='$id' ";
                       $query = mysqli_query($con,$sql);
 
                       	while ($row = mysqli_fetch_array($query)) {
                         ?>
-                      <p class="mb-0"><strong class="pr-1">Patient ID:</strong>P2021<?php echo $rand;?></p>
+                      <p class="mb-0"><strong class="pr-1">Patient ID:</strong><?php echo $id;?></p>
                       <p class="mb-0"><strong class="pr-1">Status:</strong><?php echo $row['status'];?></p>
 
                       <p class="mb-0"><strong class="pr-1">Date:</strong><?php echo $month.'-'.$day.'-'.$year;?></p>
-                      <a href="">View Current Status</a>
+                      <a href='profile-cur-status.php?patient_id= <?php echo $id; ?>'>View Current Status</a>
                       <br>
                         <?php
                       }

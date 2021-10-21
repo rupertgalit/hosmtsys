@@ -15,7 +15,7 @@
   <!--Only for demo purpose - no need to add.-->
   <link rel="stylesheet" href="css/profile-demo.css" />
 
-  <link rel="stylesheet" href="css/profile-style1.css">
+  <link rel="stylesheet" href="css/profile-style.css">
 
   <style>
 
@@ -26,6 +26,34 @@
     background-repeat: no-repeat;
     background-size: cover;
     color: rgb(1, 11, 232);
+  }
+
+  .form{
+    display: inline-flex;
+    width: 300px;
+    border-radius: 10px;
+  }
+
+
+  .card {
+    background:rgba(153, 214, 230, 0.28);
+    display: flex;
+
+  }
+  .card-container{
+
+    display:inline-block;
+    align-content: space-between;
+    margin: auto;
+
+
+
+
+  }
+  .card-content{
+    padding: 10px;
+    margin-top: -70px;
+
   }
 
 
@@ -72,7 +100,7 @@
       <div class="col-rt-12">
         <div class="head">
           <div class="head2">
-            <button onclick="location.href='patients-records.php'" type="button">
+            <button onclick="location.href='reception.php'" type="button">
               Back</button>
             </div>
       </div>
@@ -107,11 +135,11 @@
 
                       	while ($row = mysqli_fetch_array($query)) {
                         ?>
-                      <p class="mb-0"><strong class="pr-1">Patient ID:</strong>P2021<?php echo $rand;?></p>
+                      <p class="mb-0"><strong class="pr-1">Patient ID:</strong><?php echo $id;?></p>
                       <p class="mb-0"><strong class="pr-1">Status:</strong><?php echo $row['status'];?></p>
 
                       <p class="mb-0"><strong class="pr-1">Date:</strong><?php echo $month.'-'.$day.'-'.$year;?></p>
-                      <a href="">View Current Status</a>
+                      <a href='profile.php?patient_id= <?php echo $id; ?>'>View Current Status</a>
                       <br>
                         <?php
                       }
@@ -127,64 +155,49 @@
                 </div>
                 </div>
                 <div class="col-lg-8">
-                  <div class="card shadow-sm">
-                    <div class="card-header bg-transparent border-0">
+                  <div class="card shadow-sm ">
+                    <div class="card-header">
                       <h3 class="mb-0"><i class="far fa-clone pr-1"></i>General Information</h3>
                     </div>
 
                     <div class="card-body pt-0">
-                      <?php
-                      $id = $_GET['patient_id'];
-                      require '../includes/connect.php';
-                      $sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id WHERE medication.patient_id='$id' ";
-                      $query = mysqli_query($con,$sql);
-                      ?>
-                      <table class="table table-bordered">
-                        <?php
-
-                      	while ($row = mysqli_fetch_array($query)) {
-                          ?>
-
-                        <tr>
-                          <th width="30%">Name</th>
-                          <td width="2%">:</td>
-                          <td><?php echo $row['fname'].' '.$row['sname'];?></td>
-                        </tr>
-                        <tr>
-                          <th width="30%">Email Address</th>
-                          <td width="2%">:</td>
-                          <td><?php echo $row['email'];?></td>
-                        </tr>
-                        <tr>
-                          <th width="30%">Address</th>
-                          <td width="2%">:</td>
-                          <td><?php echo $row['address'];?></td>
-                        </tr>
-                        <tr>
-                          <th width="30%">Phone</th>
-                          <td width="2%">:</td>
-                          <td><?php echo $row['phone'];?></td>
-                        </tr>
-                        <tr>
-                          <th width="30%">Gender</th>
-                          <td width="2%">:</td>
-                          <td><?php echo $row['sex'];?></td>
-                        </tr>
-                        <tr>
-                          <th width="30%">Bloodtype</th>
-                          <td width="2%">:</td>
-                          <td><?php echo $row['bloodgroup'];?></td>
-                        </tr>
-                        <tr>
-                          <th width="30%">Birthyear</th>
-                          <td width="2%">:</td>
-                          <td><?php echo $row['birthyear'];?></td>
-                        </tr>
-                        <?php
-                      }
-                    echo '  </table>';
-                    ?>
-
+                    <!-- box2 -->
+                    <div class="card-container">
+                        <div class="card-content">
+                        <form action="addsymptoms.php?id=<?php echo $id = $_GET['id']; ?>" method="POST">
+               				<br><br>
+               				<label for="test"><b>Findings</b></label><br>
+               				<textarea required="required" name="test" id="test" class="form" style="height:200px; padding-left:20px;padding-top:20px;font-family:Arial;" placeholder=""></textarea><br>
+               				<input type="submit" value="Add Findings" class="btnlink" name="btn"><br><br>
+               			    </form>
+                            </div>
+                        <div class="card-content">
+                        <form action="addsymptoms.php?id=<?php echo $id = $_GET['id']; ?>" method="POST">
+                      <br><br>
+                      <label for="test"><b>Laboratory Test</b></label><br>
+                      <textarea required="required" name="test" id="test" class="form" style="height:200px; padding-left:20px;padding-top:20px;font-family:Arial;" placeholder=""></textarea><br>
+                      <input type="submit" value="Send To Lab" class="btnlink" name="btn"><br><br>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="card-container">
+                        <div class="card-content">
+                        <form action="addsymptoms.php?id=<?php echo $id = $_GET['id']; ?>" method="POST">
+               				<br><br>
+               				<label for="test"><b>Treatment</b></label><br>
+               				<textarea required="required" name="test" id="test" class="form" style="height:200px; padding-left:20px;padding-top:20px;font-family:Arial;" placeholder=""></textarea><br>
+               				<input type="submit" value="Add Treatment" class="btnlink" name="btn"><br><br>
+               			    </form>
+                            </div>
+                        <div class="card-content">
+                        <form action="addsymptoms.php?id=<?php echo $id = $_GET['id']; ?>" method="POST">
+                      <br><br>
+                      <label for="test"><b>Pharmacy</b></label><br>
+                      <textarea required="required" name="test" id="test" class="form" style="height:200px; padding-left:20px;padding-top:20px;font-family:Arial;" placeholder=""></textarea><br>
+                      <input type="submit" value="Send To Pharmacy" class="btnlink" name="btn"><br><br>
+                        </form>
+                      </div>
+                    </div>
                     </div>
                   </div>
 
