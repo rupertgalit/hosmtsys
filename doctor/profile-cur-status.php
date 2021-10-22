@@ -136,10 +136,16 @@
                       	while ($row = mysqli_fetch_array($query)) {
                         ?>
                       <p class="mb-0"><strong class="pr-1">Patient ID:</strong><?php echo $id;?></p>
-                      <p class="mb-0"><strong class="pr-1">Status:</strong><?php echo $row['status'];?></p>
-
+                      <p class="mb-0"><strong class="pr-1">Patient Name:</strong><?php echo $row['fname'].' '.$row['sname'];?></p>
                       <p class="mb-0"><strong class="pr-1">Date:</strong><?php echo $month.'-'.$day.'-'.$year;?></p>
                       <a href='profile.php?patient_id= <?php echo $id; ?>'>View Current Status</a>
+                      <p class="mb-0"><strong class="pr-1">Status:</strong><?php echo $row['status'];?></p>
+                      <p class="mb-0"><strong class="pr-1">Complain:</strong><?php echo $row['symptoms'];?></p>
+                      <p class="mb-0"><strong class="pr-1">Findings:</strong><?php echo $row['findings'];?></p>
+                      <p class="mb-0"><strong class="pr-1">Treatment:</strong><?php echo $row['treatment'];?></p>
+                      <p class="mb-0"><strong class="pr-1">Laboratory Test:</strong><?php echo $row['tests'];?></p>
+                      <p class="mb-0"><strong class="pr-1">Test Result:</strong><?php echo $row['test_results'];?></p>
+                      <p class="mb-0"><strong class="pr-1">Medicine:</strong><?php echo $row['medical'];?></p>
                       <br>
                         <?php
                       }
@@ -162,14 +168,40 @@
 
                     <div class="card-body pt-0">
                     <!-- box2 -->
+
+
                     <div class="card-container">
                         <div class="card-content">
-                        <form action="addsymptoms.php?id=<?php echo $id = $_GET['id']; ?>" method="POST">
+                          <h3>
+                            <?php
+                            require '../includes/connect.php';
+                            $id = $_GET['patient_id'];
+                            $sql = mysqli_query($con,"SELECT * FROM `medication` WHERE `patient_id`='$id'");
+                            while ($row=mysqli_fetch_array($sql)) {
+                              $idd = $row['patient_id'];
+                              $sql1 = mysqli_query($con,"SELECT * FROM `assigned_patient` WHERE `patient_id`='$idd'");
+                              while ($roww = mysqli_fetch_array($sql1)) {
+                                echo $roww['fname']." ".$roww['sname'];
+                              }
+                               echo $row['patient_id'];
+                            }
+                             ?>
+                           </h3>
+
+                        <form action="addfindings.php?patient_id=<?php echo $id = $_GET['patient_id'] ; ?>" method="POST">
                				<br><br>
-               				<label for="test"><b>Findings</b></label><br>
-               				<textarea required="required" name="test" id="test" class="form" style="height:200px; padding-left:20px;padding-top:20px;font-family:Arial;" placeholder=""></textarea><br>
+               				<label for="findings"><b>Findings</b></label><br>
+               				<textarea required="required" name="findings" id="findings" class="form" style="height:200px; padding-left:20px;padding-top:20px;font-family:Arial;" placeholder=""></textarea><br>
                				<input type="submit" value="Add Findings" class="btnlink" name="btn"><br><br>
                			    </form>
+                        <?php
+                        extract($_POST);
+                        if (isset($btn) && !empty($symptoms)) {
+                          require "../includes/doctor.php";
+                          addfindings();
+                        }
+                         ?>
+
                             </div>
                         <div class="card-content">
                         <form action="addsymptoms.php?id=<?php echo $id = $_GET['id']; ?>" method="POST">

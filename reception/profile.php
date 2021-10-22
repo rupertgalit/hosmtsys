@@ -107,11 +107,11 @@
 
                       	while ($row = mysqli_fetch_array($query)) {
                         ?>
-                      <p class="mb-0"><strong class="pr-1">Patient ID:</strong>P2021<?php echo $rand;?></p>
+                      <p class="mb-0"><strong class="pr-1">Patient ID:</strong><?php echo $id;?></p>
                       <p class="mb-0"><strong class="pr-1">Status:</strong><?php echo $row['status'];?></p>
 
                       <p class="mb-0"><strong class="pr-1">Date:</strong><?php echo $month.'-'.$day.'-'.$year;?></p>
-                      <a href="">View Current Status</a>
+                      <a href='profile-curr-status.php?patient_id=<?php echo $id; ?>'>View Current Status</a>
                       <br>
                         <?php
                       }

@@ -81,7 +81,10 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 				addsymptoms();
 			}
 			 ?>
+
+
 			</center>
+
 		</div>
 
 	</div>

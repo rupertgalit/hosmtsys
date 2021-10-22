@@ -16,7 +16,7 @@ function recdoctor()
 			echo "<td>".$row2['fname']."</td>";
 			echo "<td>".$row2['sname']."</td>";
 			echo "<td>".$row2['sex']."</td>";
-			echo "<td><center><a href='profile.php?patient_id=".$row['patient_id']."'>Add</a></center></td>";
+			echo "<td><center><a href='addsymptoms.php?id=".$row['id']."'>Add</a></center></td>";
 			echo "</tr>";
 		}
 
@@ -106,6 +106,26 @@ function addsymptoms()
 		include "connect.php";
 
 		$sql = "UPDATE `medication` SET `status`='laboratory',`symptoms`='$symptoms',`tests`='$test' WHERE `id`='$id'";
+		$query = mysqli_query($con,$sql);
+		if (!empty($query)) {
+			$day = date('d');
+			$month = date('m');
+			$year = date('Y');
+			$doctor = $_SESSION['doctor'];
+			$report = mysqli_query($con,"INSERT INTO `doctorreport` VALUES ('','$doctor','$id','$day','$month','$year')");
+			echo "<br><b style='color:#008080;font-size:14px;font-family:Arial;'>Succesifully Sent</b>";
+		}
+	}
+}
+function addfindings()
+{
+	$findings = trim(htmlspecialchars($_POST['findings']));
+	if (!empty($symptoms)) {
+		$id = $_GET['patient_id'];
+		@require_once "connect.php";
+		include "connect.php";
+
+		$sql = "UPDATE `medication` SET `status`='Consultation',`findings`='$findings' WHERE `patient_id`='$id'";
 		$query = mysqli_query($con,$sql);
 		if (!empty($query)) {
 			$day = date('d');

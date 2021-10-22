@@ -15,7 +15,7 @@
   <!--Only for demo purpose - no need to add.-->
   <link rel="stylesheet" href="css/profile-demo.css" />
 
-  <link rel="stylesheet" href="css/profile-style.css">
+  <link rel="stylesheet" href="css/profile-style1.css">
 
   <style>
 
@@ -27,15 +27,6 @@
     background-size: cover;
     color: rgb(1, 11, 232);
   }
-
-  .card {
-    background:rgba(153, 214, 230, 0.28);
-    display: flex;
-}
-
-tr{
-  border-color: black;
-}
 
 
   .head1{
@@ -81,7 +72,7 @@ tr{
       <div class="col-rt-12">
         <div class="head">
           <div class="head2">
-            <button onclick="location.href='reception.php'" type="button">
+            <button onclick="location.href='profile.php?patient_id=<?php echo $_GET['patient_id']; ?>'" type="button">
               Back</button>
             </div>
       </div>
@@ -110,16 +101,16 @@ tr{
                         $day = date('d');
                     		$month = date('m');
                     		$year = date('Y');
-
+                        $rand = rand();
                       $sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id WHERE medication.patient_id='$id' ";
                       $query = mysqli_query($con,$sql);
 
                       	while ($row = mysqli_fetch_array($query)) {
                         ?>
+                      <p class="mb-0"><strong class="pr-1">Patient name:</strong><?php echo $row['fname'].' '.$row['sname'];?></p>
                       <p class="mb-0"><strong class="pr-1">Patient ID:</strong><?php echo $id;?></p>
-                      <p class="mb-0"><strong class="pr-1">Status:</strong><?php echo $row['status'];?></p>
                       <p class="mb-0"><strong class="pr-1">Date:</strong><?php echo $month.'-'.$day.'-'.$year;?></p>
-                      <a href='profile-cur-status.php?patient_id= <?php echo $id; ?>'>View Current Status</a>
+                      <!-- <a href="">View Current Status</a> -->
                       <br>
                         <?php
                       }
@@ -130,7 +121,7 @@ tr{
                   <div class="card shadow-sm">
 
                   <div class ="card-body">
-                    <a href=""><img src="https://printcal.net/web-calendar.png?size=m&w=s&ho=00&mo=00&so=1" alt=""/ style="border-radius: 10px;"></a>
+                    <a href=""><img src="https://printcal.net/web-calendar.png?size=m&w=s&ho=00&mo=00&so=1" alt=""/></a>
                   </div>
                 </div>
                 </div>
@@ -143,50 +134,58 @@ tr{
                     <div class="card-body pt-0">
                       <?php
                       $id = $_GET['patient_id'];
+                      $day = date('d');
+                      $month = date('m');
+                      $year = date('Y');
                       require '../includes/connect.php';
-                      $sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id WHERE medication.patient_id='$id' ";
+                      $sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id WHERE medication.patient_id='$id' and medication.date = '$day' and medication.month = '$month'and medication.year = '$year' ";
                       $query = mysqli_query($con,$sql);
                       ?>
-                      <table class="table table-bordered" style="border-color: rgb(0, 0, 0);">
+                      <table class="table table-bordered">
                         <?php
 
                       	while ($row = mysqli_fetch_array($query)) {
                           ?>
 
                         <tr>
-                          <th width="30%">Name</th>
+                          <th width="30%">Date</th>
                           <td width="2%">:</td>
-                          <td><?php echo $row['fname'].' '.$row['sname'];?></td>
+                          <td><?php echo $month.'-'.$day.'-'.$year;?></td>
                         </tr>
                         <tr>
-                          <th width="30%">Email Address</th>
+                          <th width="30%">Status</th>
                           <td width="2%">:</td>
-                          <td><?php echo $row['email'];?></td>
+                          <td><?php echo $row['status'];?></td>
                         </tr>
                         <tr>
-                          <th width="30%">Address</th>
+                          <th width="30%">Complains</th>
                           <td width="2%">:</td>
-                          <td><?php echo $row['address'];?></td>
+                          <td><?php echo $row['symptoms'];?></td>
                         </tr>
                         <tr>
-                          <th width="30%">Phone</th>
+                          <th width="30%">Findings</th>
                           <td width="2%">:</td>
-                          <td><?php echo $row['phone'];?></td>
+                          <td><?php echo $row['findings'];?></td>
                         </tr>
                         <tr>
-                          <th width="30%">Gender</th>
+                          <th width="30%">Treatment</th>
                           <td width="2%">:</td>
-                          <td><?php echo $row['sex'];?></td>
+                          <td><?php echo $row['treatment'];?></td>
                         </tr>
                         <tr>
-                          <th width="30%">Bloodtype</th>
+                          <th width="30%">Laboratory Test</th>
                           <td width="2%">:</td>
-                          <td><?php echo $row['bloodgroup'];?></td>
+                          <td><?php echo $row['tests'];?></td>
                         </tr>
                         <tr>
-                          <th width="30%">Birthyear</th>
+                          <th width="30%">Test Results</th>
                           <td width="2%">:</td>
-                          <td><?php echo $row['birthyear'];?></td>
+                          <td><?php echo $row['test_results'];?></td>
+                        </tr>
+                        <tr>
+                          <th width="30%">Medicine</th>
+                          <td width="2%">:</td>
+                          <td><?php echo $row['medical'];?></td>
                         </tr>
                         <?php
                       }
@@ -194,6 +193,15 @@ tr{
                     ?>
 
                     </div>
+                    <center>
+                    <form>
+                      <h5>Patient Complain</h5>
+                      <input type="textarea" required="required"></input><br><br>
+                      <input type="submit" value="Request Doctor"></input>
+                    </form>
+                    <br>
+                  </center>
+
                   </div>
 
 

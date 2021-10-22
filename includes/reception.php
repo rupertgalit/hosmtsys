@@ -263,7 +263,7 @@ function searchpatients_records()
 {
 	require 'connect.php';
 	$sachi = $_GET['s'];
-	$sql = "SELECT * FROM `assigned_patient` WHERE `patient_id` LIKE '%$sachi%'";
+	$sql = "SELECT * FROM `assigned_patient` WHERE `fname` LIKE '%$sachi%' or `sname` LIKE '%$sachi%'";
 	$query = mysqli_query($con,$sql);
 	while ($row = mysqli_fetch_array($query)) {
 		echo "<tr height=30px'>";
@@ -272,7 +272,7 @@ function searchpatients_records()
 		echo "<td>".$row['sname']."</td>";
 		echo "<td>".$row['phone']."</td>";
 		echo "<td>".$row['sex']."</td>";
-		echo "<td><center><a href='viewpatient-records.php?patient_id=".$row['patient_id']."'>View</a></center></td>";
+		echo "<td><center><a href='profile.php?patient_id=".$row['patient_id']."'>View</a></center></td>";
 		echo "<td><center><a href='editpatient-records.php?patient_id=".$row['patient_id']."'><img src='../assets/img/glyphicons-151-edit.png' height='16px' width='17px'></a></center></td>";
 		echo "<td><center><a href='deletepatient-records.php?patient_id=".$row['patient_id']."'><img src='../assets/img/glyphicons-17-bin.png' height='16px' width='12px'></a></center></td>";
 		echo "</tr>";
