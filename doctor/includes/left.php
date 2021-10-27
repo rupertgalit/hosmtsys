@@ -18,7 +18,7 @@
 								<?php
 									@require "./../includes/connect.php";
 									$typee = $_SESSION['type'];
-									$sql = "SELECT * From `medication` WHERE `doctor_type`='$typee' AND `status`='recdoctor'";
+									$sql = "SELECT * From `medication` WHERE `doctor_type`='$typee' AND (`status`='recdoctor' or `status`='Consultation')";
 									$query = mysqli_query($con,$sql);
 									echo "(".mysqli_num_rows($query).")";
 								?>

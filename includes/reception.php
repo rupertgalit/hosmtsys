@@ -23,7 +23,8 @@ function patients()
 function patients_records()
 {
 	require 'connect.php';
-	$sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id;";
+	// $sql = "SELECT *  from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id Where ;";
+	$sql = "SELECT * FROM `assigned_patient`";
 	$query = mysqli_query($con,$sql);
 	while ($row = mysqli_fetch_array($query)) {
 
@@ -32,7 +33,7 @@ function patients_records()
 		echo "<td>P-".$row['patient_id']."</td>";
 		echo "<td>".$row['fname']."</td>";
 		echo "<td>".$row['sname']."</td>";
-		echo "<td>(+63)".$row['phone']."</td>";
+		echo "<td>".$row['phone']."</td>";
 		echo "<td>".$row['sex']."</td>";
 		echo "<td>".$row['birthyear']."</td>";
 		echo "<td><center><a href='profile.php?patient_id=".$row['patient_id']."'>View</a></center></td>";
@@ -231,23 +232,69 @@ function viewpatient()
 				<td style='width:40%;padding-left:20px;'><b>YEARS</b></td>
 				<td>".$year."</td>
 			</tr>
-
-
 		";
-
 	}
 }
+function view_oldpatient()
+{
+	$id = $_GET['patient_id'];
+	require 'connect.php';
+	$sql = "SELECT * FROM `assigned_patient` WHERE `patient_id`='$id'";
+	$query = mysqli_query($con,$sql);
+	while ($row = mysqli_fetch_array($query)) {
+		$year = date('Y') - $row['birthyear'];
+		echo "
+		<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>ID</b></td>
+				<td>".$row['patient_id']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>FIRSTNAME</b></td>
+				<td>".$row['fname']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>SURNAME</b></td>
+				<td>".$row['sname']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>EMAIL</b></td>
+				<td>".$row['email']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>ADDRESS</b></td>
+				<td>".$row['address']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>PHONE</b></td>
+				<td>".$row['phone']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>GENDER</b></td>
+				<td>".$row['sex']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>BLOOD GRUOP</b></td>
+				<td>".$row['bloodgroup']."</td>
+			</tr>
+			<tr style='height:40px;'>
+				<td style='width:40%;padding-left:20px;'><b>YEARS</b></td>
+				<td>".$year."</td>
+			</tr>
+		";
+	}
+}
+
 
 
 function searchpatients()
 {
 	require 'connect.php';
 	$sachi = $_GET['s'];
-	$sql = "SELECT * FROM `patient` WHERE `id` LIKE '%$sachi%'";
+	$sql = "SELECT * FROM `patient` WHERE `fname` LIKE '%$sachi%' or `sname` LIKE '%$sachi%'";
 	$query = mysqli_query($con,$sql);
 	while ($row = mysqli_fetch_array($query)) {
 		echo "<tr height=30px'>";
-		echo "<td>P-".$row['id']."</td>";
+		echo "<td>".$row['id']."</td>";
 		echo "<td>".$row['fname']."</td>";
 		echo "<td>".$row['sname']."</td>";
 		echo "<td>".$row['phone']."</td>";
@@ -309,6 +356,7 @@ function assigntodoctor()
 {
 	include "connect.php";
 	$doctor = trim(htmlspecialchars($_POST['doctor']));
+	$complain = trim(htmlspecialchars($_POST['complain']));
 
 	require_once "connect.php";
 	$id = $_GET['id'];
@@ -381,19 +429,15 @@ function assigntodoctor()
 		$price = 0;
 		$rand = rand(10000,99999);
 
-				$sql = "INSERT INTO `medication` VALUES (null,'$id','recdoctor','','','','','','','$doctor','$rand','$price','$test_price','$medical_price','$day','$month','$year')";
+				$sql = "INSERT INTO `medication` VALUES (null,'$id','recdoctor','$complain','','','','','','$doctor','$rand','$price','$test_price','$medical_price','$day','$month','$year')";
 
 			$query = mysqli_query($con,$sql);
 			if (!empty($query)) {
 				echo "<br><b style='color:#008080;font-size:14px;font-family:Arial;'>Patient is Succesifully Assigned To Doctor</b><br><br>";
-
-
-
 			}
 			else{
 				echo mysqli_error($con);
 			}
-
 			$id = $_GET['id'];
 			require 'connect.php';
 			$sql = "SELECT * FROM `patient` WHERE `id`='$id'";
@@ -410,26 +454,20 @@ function assigntodoctor()
 			$bloodgroup = $row['bloodgroup'];
 			$birthyear = $row['birthyear'];
 
-
 			$sql2 = "INSERT INTO `assigned_patient` VALUES (null,'$id','$fname','$sname','$email','$address','$phone','$sex','$bloodgroup','$birthyear')";
-
 			$query2 = mysqli_query($con,$sql2);
 			if (!empty($query2)) {
-
 			}
 			else{
 			echo mysqli_error($con);
 			}
 			}
-
 				$id = $_GET['id'];
-
 				require_once "../includes/connect.php";
 				$sql3 = "DELETE FROM `patient` WHERE `id`='$id'";
 				$query3 = mysqli_query($con,$sql3);
 				if (!empty($query3)) {
 				}
-
 
 
 
@@ -491,9 +529,34 @@ function assigntodoctor()
 				}
 			}
 	}
-
-
 }
+
+function assigntodoctor_oldp()
+{
+	include "connect.php";
+	$doctor = trim(htmlspecialchars($_POST['doctor']));
+	$complain = trim(htmlspecialchars($_POST['complain']));
+	require_once "connect.php";
+	$id = $_GET['patient_id'];
+	$day = date('d');
+		$month = date('m');
+		$year = date('Y');
+		$test_price = "0";
+		$medical_price = "0";
+		$price = 0;
+		$rand = rand(10000,99999);
+
+				$sql = "INSERT INTO `medication` VALUES (null,'$id','recdoctor','$complain','','','','','','$doctor','$rand','$price','$test_price','$medical_price','$day','$month','$year')";
+
+			$query = mysqli_query($con,$sql);
+			if (!empty($query)) {
+				echo "<br><b style='color:#008080;font-size:14px;font-family:Arial;'>Patient is Succesifully Assigned To Doctor</b><br><br>";
+			}
+			else{
+				echo mysqli_error($con);
+			}
+			}
+
 
 function updatepatient()
 {

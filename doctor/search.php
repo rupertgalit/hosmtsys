@@ -47,7 +47,7 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 					<th>Firstname</th>
 					<th>Surname</th>
 					<th>Gender</th>
-					<th>Add symptoms</th>
+					<th>Details</th>
 				</tr>
 				<?php
 				require '../includes/doctor.php';

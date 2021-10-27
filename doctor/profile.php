@@ -31,6 +31,9 @@
   .card {
     background:rgba(153, 214, 230, 0.28);
     display: flex;
+    border-style:outset ;
+    border-color:rgba(153, 214, 230, 0.5);
+    border-width:2px;
 }
 
 tr{
@@ -45,11 +48,8 @@ tr{
     width: auto;
     padding-left: 400px;
     padding-right:  100px;
-
   }
   .head2{
-
-
 
   }
   .head{
@@ -83,6 +83,8 @@ tr{
           <div class="head2">
             <button onclick="location.href='reception.php'" type="button">
               Back</button>
+              <button onclick="location.href='index.php'" type="button">
+                Dashboard</button>
             </div>
       </div>
     </div>
@@ -105,21 +107,21 @@ tr{
 
                     <div class="card-body">
                       <?php
-                        $id = $_GET['patient_id'];
+                        $id = $_GET['id'];
                       require '../includes/connect.php';
                         $day = date('d');
                     		$month = date('m');
                     		$year = date('Y');
 
-                      $sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id WHERE medication.patient_id='$id' ";
+                      $sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id WHERE medication.id='$id' ";
                       $query = mysqli_query($con,$sql);
 
                       	while ($row = mysqli_fetch_array($query)) {
                         ?>
-                      <p class="mb-0"><strong class="pr-1">Patient ID:</strong><?php echo $id;?></p>
+                      <p class="mb-0"><strong class="pr-1">Patient ID:</strong><?php echo $row['patient_id'];?></p>
                       <p class="mb-0"><strong class="pr-1">Status:</strong><?php echo $row['status'];?></p>
                       <p class="mb-0"><strong class="pr-1">Date:</strong><?php echo $month.'-'.$day.'-'.$year;?></p>
-                      <a href='profile-cur-status.php?patient_id= <?php echo $id; ?>'>View Current Status</a>
+                      <a href='profile-cur-status.php?id= <?php echo $id; ?>'>View Current Status</a>
                       <br>
                         <?php
                       }
@@ -130,7 +132,9 @@ tr{
                   <div class="card shadow-sm">
 
                   <div class ="card-body">
-                    <a href=""><img src="https://printcal.net/web-calendar.png?size=m&w=s&ho=00&mo=00&so=1" alt=""/ style="border-radius: 10px;"></a>
+                    <iframe src="https://beepmyclock.com/widget/alarm" frameborder="0" style="border:0;height:135px;"></iframe>
+                    <a href=""><img src="https://printcal.net/web-calendar.png?size=m&w=s&ho=00&mo=00&so=1" alt=""/ style="border-radius: 10px;border-style: outset;border-color: rgba(153, 214, 230, 0.5);"></a>
+
                   </div>
                 </div>
                 </div>
@@ -142,9 +146,9 @@ tr{
 
                     <div class="card-body pt-0">
                       <?php
-                      $id = $_GET['patient_id'];
+                      $id = $_GET['id'];
                       require '../includes/connect.php';
-                      $sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id WHERE medication.patient_id='$id' ";
+                      $sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id WHERE medication.id='$id' ";
                       $query = mysqli_query($con,$sql);
                       ?>
                       <table class="table table-bordered" style="border-color: rgb(0, 0, 0);">
@@ -205,21 +209,16 @@ tr{
                     <div  class="card-body pt-0">
 
                       <?php
-                      $id = $_GET['patient_id'];
-                      $day = date('d');
-                      $month = date('m');
-                      $year = date('Y');
+                      $id = $_GET['id'];
+
                       $rand = rand();
 
                       require '../includes/connect.php';
-                      $sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id WHERE medication.patient_id='$id' ";
+                      $sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id WHERE medication.id='$id' ";
                       $query = mysqli_query($con,$sql);
                       ?>
-
                       <table class="table table-bordered">
-                        <?php
-                      	while ($row = mysqli_fetch_array($query)) {
-                          ?>
+
                         <tr>
                           <th >Date</th>
                           <th>Complains</th>
@@ -228,19 +227,29 @@ tr{
                           <th>Medicine</th>
                           <th>Reference No</th>
                           <th>Details</th>
-
                         </tr>
+                        <?php
+                      	while ($row = mysqli_fetch_array($query)) {
+                          $patient_id = $row['patient_id'];
+                          $date1 = $row['month'].'-'.$row['date'].'-'.$row['year'];
+                          $sql1 = "SELECT * from `medication`  WHERE `patient_id`='$patient_id' ORDER BY '$date1' ";
+                          $query1 = mysqli_query($con,$sql1);
+                          while ($roww= mysqli_fetch_array($query1)) {
+                            $date1 = $roww['month'].'-'.$roww['date'].'-'.$roww['year'];
+                          ?>
                         <tr>
-                          <td><?php echo $month.'-'.$day.'-'.$year;?></td>
-                          <td><?php echo $row['symptoms'];?></td>
-                          <td><?php echo $row['findings'];?></td>
-                          <td><?php echo $row['treatment'];?></td>
-                          <td><?php echo $row['medical'];?></td>
-                          <td><?php echo $row['reference_no'];?></td>
-                          <td><a href="">View<a></td>
+                          <td><?php echo $date1;?></td>
+                          <td><?php echo $roww['complain'];?></td>
+                          <td><?php echo $roww['findings'];?></td>
+                          <td><?php echo $roww['treatment'];?></td>
+                          <td><?php echo $roww['medical'];?></td>
+                          <td><?php echo $roww['reference_no'];?></td>
+                          <td><a href="profile-hist-status.php?reference_no=<?php echo $row['reference_no'];?>">View<a></td>
+
                         </tr>
 
                         <?php
+                      }
                       }
                     echo '  </table>';
                     ?>

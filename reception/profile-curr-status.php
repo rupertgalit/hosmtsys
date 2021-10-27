@@ -11,8 +11,6 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
-
-  <!--Only for demo purpose - no need to add.-->
   <link rel="stylesheet" href="css/profile-demo.css" />
 
   <link rel="stylesheet" href="css/profile-style1.css">
@@ -40,14 +38,18 @@
   }
   .head2{
 
-
-
   }
   .head{
     display:flex;
     padding-left: 50px;
     padding-right: 50px;
   }
+  .card{
+    border-style:outset ;
+    border-color:rgba(153, 214, 230, 0.5);
+    border-width:2px;
+  }
+
   </style>
 
 </head>
@@ -74,6 +76,8 @@
           <div class="head2">
             <button onclick="location.href='profile.php?patient_id=<?php echo $_GET['patient_id']; ?>'" type="button">
               Back</button>
+              <button onclick="location.href='index.php'" type="button">
+                Dashboard</button>
             </div>
       </div>
     </div>
@@ -102,7 +106,7 @@
                     		$month = date('m');
                     		$year = date('Y');
                         $rand = rand();
-                      $sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id WHERE medication.patient_id='$id' ";
+                      $sql = "SELECT * from `assigned_patient` WHERE `patient_id`='$id' ";
                       $query = mysqli_query($con,$sql);
 
                       	while ($row = mysqli_fetch_array($query)) {
@@ -121,18 +125,20 @@
                   <div class="card shadow-sm">
 
                   <div class ="card-body">
-                    <a href=""><img src="https://printcal.net/web-calendar.png?size=m&w=s&ho=00&mo=00&so=1" alt=""/></a>
+                    <iframe src="https://beepmyclock.com/widget/alarm" frameborder="0" style="border:0;height:135px;"></iframe>
+                    <a href=""><img src="https://printcal.net/web-calendar.png?size=m&w=s&ho=00&mo=00&so=1" alt=""/ style="border-radius: 10px;border-style: outset;border-color: rgba(153, 214, 230, 0.5);"></a>
                   </div>
                 </div>
                 </div>
                 <div class="col-lg-8">
                   <div class="card shadow-sm">
                     <div class="card-header bg-transparent border-0">
-                      <h3 class="mb-0"><i class="far fa-clone pr-1"></i>General Information</h3>
+                      <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Current Record</h3>
                     </div>
 
                     <div class="card-body pt-0">
                       <?php
+
                       $id = $_GET['patient_id'];
                       $day = date('d');
                       $month = date('m');
@@ -160,7 +166,7 @@
                         <tr>
                           <th width="30%">Complains</th>
                           <td width="2%">:</td>
-                          <td><?php echo $row['symptoms'];?></td>
+                          <td><?php echo $row['complain'];?></td>
                         </tr>
                         <tr>
                           <th width="30%">Findings</th>
@@ -190,13 +196,14 @@
                         <?php
                       }
                     echo '  </table>';
+
+
+
                     ?>
 
                     </div>
                     <center>
-                    <form>
-                      <h5>Patient Complain</h5>
-                      <input type="textarea" required="required"></input><br><br>
+                    <form action="view-oldpatient.php?patient_id=<?php echo $id = $_GET['patient_id']; ?>" method="POST">
                       <input type="submit" value="Request Doctor"></input>
                     </form>
                     <br>
@@ -225,9 +232,7 @@
                       ?>
 
                       <table class="table table-bordered">
-                        <?php
-                      	while ($row = mysqli_fetch_array($query)) {
-                          ?>
+
                         <tr>
                           <th >Date</th>
                           <th>Complains</th>
@@ -238,14 +243,18 @@
                           <th>Details</th>
 
                         </tr>
+                        <?php
+                      	while ($row = mysqli_fetch_array($query)) {
+                          $date1 = $row['month'].'-'.$row['date'].'-'.$row['year'];
+                          ?>
                         <tr>
-                          <td><?php echo $month.'-'.$day.'-'.$year;?></td>
-                          <td><?php echo $row['symptoms'];?></td>
+                          <td><?php echo $date1?></td>
+                          <td><?php echo $row['complain'];?></td>
                           <td><?php echo $row['findings'];?></td>
                           <td><?php echo $row['treatment'];?></td>
                           <td><?php echo $row['medical'];?></td>
                           <td><?php echo $row['reference_no'];?></td>
-                          <td><a href="">View<a></td>
+                          <td><a href="profile-hist-status.php?reference_no=<?php echo $row['reference_no'];?>">View<a></td>
                         </tr>
 
                         <?php

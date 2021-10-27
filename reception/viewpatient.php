@@ -53,15 +53,15 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 
 			$sql = "SELECT * FROM `patient` WHERE `id`='$id'";
 			$query = mysqli_query($con,$sql);
-			while ($row = mysqli_fetch_array($query)) {
-				echo $row['image'];
-			}
+
 
 			?>
 			<br><br>
 		</div>
 			<center>
 				<form action="viewpatient.php?id=<?php echo $id = $_GET['id']; ?>" method="post">
+					<h5>Complain:</h5>
+					<input type="text" name="complain" required="required" placeholder="Complain:"><br><br>
 				<select name="doctor" class="form" required="required">
 					<option value="">Choose Doctor</option>
 					<option>NormalDoctor</option>

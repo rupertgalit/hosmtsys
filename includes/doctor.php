@@ -3,7 +3,7 @@ function recdoctor()
 {
 	include "connect.php";
 			$typee = $_SESSION['type'];
-			$sql = "SELECT * From `medication` WHERE `doctor_type`='$typee' AND `status`='recdoctor'";
+			$sql = "SELECT * From `medication` WHERE `doctor_type`='$typee' AND (`status`='recdoctor' or `status`='Consultation')";
 
 	$query = mysqli_query($con,$sql);
 	while ($row = mysqli_fetch_array($query)) {
@@ -16,7 +16,7 @@ function recdoctor()
 			echo "<td>".$row2['fname']."</td>";
 			echo "<td>".$row2['sname']."</td>";
 			echo "<td>".$row2['sex']."</td>";
-			echo "<td><center><a href='addsymptoms.php?id=".$row['id']."'>Add</a></center></td>";
+			echo "<td><center><a href='profile.php?id=".$row['id']."'>View</a></center></td>";
 			echo "</tr>";
 		}
 
@@ -40,7 +40,7 @@ function labdoctor()
 			echo "<td>".$row2['fname']."</td>";
 			echo "<td>".$row2['sname']."</td>";
 			echo "<td>".$row2['sex']."</td>";
-			echo "<td><center><a href='medicine.php?id=".$row['id']."'>view</a></center></td>";
+			echo "<td><center><a href='profile.php?id=".$row['id']."'>view</a></center></td>";
 			echo "</tr>";
 		}
 
@@ -53,11 +53,11 @@ function searchpatients()
 			require 'connect.php';
 			$fname = $_GET['s'];
 			$typee = $_SESSION['type'];
-			$sql = "SELECT * From `medication` WHERE `doctor_type`='$typee' AND `status`='recdoctor'";
+			$sql = "SELECT * From `medication` WHERE `doctor_type`='$typee' AND (`status`='recdoctor' or `status`='Consultation')";
 			$query = mysqli_query($con,$sql);
 			while ($row = mysqli_fetch_array($query)) {
 				$ido = $row['patient_id'];
-				$sql2 = "SELECT * FROM `assigned_patient` WHERE `patient_id`='$ido' AND `patient_id` LIKE '%$fname%'";
+				$sql2 = "SELECT * FROM `assigned_patient` WHERE `patient_id`='$ido' AND (`fname` LIKE '%$fname%' or `sname` LIKE '%$fname%')";
 				$query2 = mysqli_query($con,$sql2);
 		while ($row2 = mysqli_fetch_array($query2)) {
 			echo "<tr height=30px'>";
@@ -65,7 +65,7 @@ function searchpatients()
 			echo "<td>".$row2['fname']."</td>";
 			echo "<td>".$row2['sname']."</td>";
 			echo "<td>".$row2['sex']."</td>";
-			echo "<td><center><a href='addsymptoms.php?id=".$row['id']."'>Add</a></center></td>";
+			echo "<td><center><a href='profile.php?id=".$row['id']."'>View</a></center></td>";
 			echo "</tr>";
 		}
 
@@ -96,44 +96,78 @@ function searchnewpatients()
 	}
 }
 
-function addsymptoms()
+function addtest()
 {
-	$symptoms = trim(htmlspecialchars($_POST['symptoms']));
+
 	$test = trim(htmlspecialchars($_POST['test']));
-	if (!empty($symptoms)) {
+	if (!empty($test)) {
 		$id = $_GET['id'];
 		@require_once "connect.php";
 		include "connect.php";
 
-		$sql = "UPDATE `medication` SET `status`='laboratory',`symptoms`='$symptoms',`tests`='$test' WHERE `id`='$id'";
+		$sql = "UPDATE `medication` SET `status`='laboratory',`tests`='$test' WHERE `id`='$id'";
 		$query = mysqli_query($con,$sql);
 		if (!empty($query)) {
 			$day = date('d');
 			$month = date('m');
 			$year = date('Y');
+			echo '<script>alert("Successfully Add")</script>';
+			if (!empty($_SESSION)) {
 			$doctor = $_SESSION['doctor'];
 			$report = mysqli_query($con,"INSERT INTO `doctorreport` VALUES ('','$doctor','$id','$day','$month','$year')");
 			echo "<br><b style='color:#008080;font-size:14px;font-family:Arial;'>Succesifully Sent</b>";
+			}
 		}
 	}
 }
 function addfindings()
 {
 	$findings = trim(htmlspecialchars($_POST['findings']));
-	if (!empty($symptoms)) {
-		$id = $_GET['patient_id'];
+	if (!empty($findings)) {
+		$id = $_GET['id'];
 		@require_once "connect.php";
 		include "connect.php";
 
-		$sql = "UPDATE `medication` SET `status`='Consultation',`findings`='$findings' WHERE `patient_id`='$id'";
+		$sql = "UPDATE `medication` SET `status`='Consultation',`findings`='$findings' WHERE `id`='$id'";
 		$query = mysqli_query($con,$sql);
+
 		if (!empty($query)) {
 			$day = date('d');
 			$month = date('m');
 			$year = date('Y');
+			echo '<script>alert("Successfully Add")</script>';
+			if (!empty($_SESSION)) {
 			$doctor = $_SESSION['doctor'];
+				// code...
+
 			$report = mysqli_query($con,"INSERT INTO `doctorreport` VALUES ('','$doctor','$id','$day','$month','$year')");
-			echo "<br><b style='color:#008080;font-size:14px;font-family:Arial;'>Succesifully Sent</b>";
+			}
+		}
+	}
+}
+
+function addtreatment()
+{
+	$treatment = trim(htmlspecialchars($_POST['treatment']));
+	if (!empty($treatment)) {
+		$id = $_GET['id'];
+		@require_once "connect.php";
+		include "connect.php";
+
+		$sql = "UPDATE `medication` SET `status`='Consultation',`treatment`='$treatment' WHERE `id`='$id'";
+		$query = mysqli_query($con,$sql);
+
+		if (!empty($query)) {
+			$day = date('d');
+			$month = date('m');
+			$year = date('Y');
+			echo '<script>alert("Successfully Add")</script>';
+			if (!empty($_SESSION)) {
+			$doctor = $_SESSION['doctor'];
+				// code...
+
+			$report = mysqli_query($con,"INSERT INTO `doctorreport` VALUES ('','$doctor','$id','$day','$month','$year')");
+			}
 		}
 	}
 }
@@ -141,16 +175,16 @@ function addfindings()
 function addmedicine()
 {
 	$medicine = trim(htmlspecialchars($_POST['medicine']));
-	$doctorsfee = trim(htmlspecialchars($_POST['doctorsfee']));
+
 	if (!empty($medicine)) {
 		$id = $_GET['id'];
 		@require_once "connect.php";
 		include "connect.php";
 
-		$sql = "UPDATE `medication` SET `status`='pharmacy',`medical`='$medicine', `doctor_price`='$doctorsfee' WHERE `id`='$id'";
+		$sql = "UPDATE `medication` SET `status`='pharmacy',`medical`='$medicine' WHERE `id`='$id'";
 		$query = mysqli_query($con,$sql);
 		if (!empty($query)) {
-			echo "<br><b style='color:#008080;font-size:14px;font-family:Arial;'>Succesifully Sent</b>";
+			echo '<script>alert("Successfully Add")</script>';
 		}
 		else{
 			echo mysqli_error();
@@ -159,6 +193,50 @@ function addmedicine()
 	else{
 		echo mysqli_error();
 	}
+}
+
+function upload()
+{
+	include "connect.php";
+	$id = $_GET['id'];
+	$sql = "SELECT * From `medication` WHERE `id`='$id'";
+	$query = mysqli_query($con,$sql);
+	while ($row = mysqli_fetch_array($query)) {
+
+
+	$ref = $row['reference_no'];
+	$file = rand(1000,100000)."-".$_FILES['file']['name'];
+	$file_loc = $_FILES['file']['tmp_name'];
+	$file_size = $_FILES['file']['size'];
+	$file_type = $_FILES['file']['type'];
+	$folder="../upload/";
+	/* new file size in KB */
+	$new_size = $file_size/1024;
+	/* new file size in KB */
+	/* make file name in lower case */
+	$new_file_name = strtolower($file);
+	/* make file name in lower case */
+	$final_file=str_replace(' ','-',$new_file_name);
+
+	if(move_uploaded_file($file_loc,$folder.$final_file))
+	{
+
+		$id = $_GET['id'];
+		 include "../includes/connect.php";
+
+		$sql="INSERT INTO `image` VALUES(null,'$ref','$final_file','$file_type','$new_size')";
+		$query = mysqli_query($con,$sql);
+
+		if(!empty($query)){
+
+			echo '<script>alert("File sucessfully upload")</script>';
+
+		}
+		else {
+			echo mysqli_error();
+		}
+	}
+}
 }
 
 function settings()

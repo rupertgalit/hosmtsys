@@ -20,15 +20,11 @@
   <style>
 
   body{
-
-
     background-image : url('css/img/med_bg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     color: rgb(1, 11, 232);
   }
-
-
   .head1{
     background-color: rgba(110, 231, 231, 0.84);
     border-radius: 10px;
@@ -36,11 +32,8 @@
     width: auto;
     padding-left: 400px;
     padding-right:  100px;
-
   }
   .head2{
-
-
 
   }
   .head{
@@ -48,12 +41,16 @@
     padding-left: 50px;
     padding-right: 50px;
   }
+  .card{
+    border-style:outset ;
+    border-color:rgba(153, 214, 230, 0.5);
+    border-width:2px;
+  }
   </style>
 
 </head>
 
 <body>
-
   <!-- <div class="ScriptTop">
     <div class="rt-container">
       <div class="col-rt-4" id="float-right"> -->
@@ -66,7 +63,6 @@
       </div>
     </div>
   </div> -->
-
   <header class="ScriptHeader">
     <div class="rt-container">
       <div class="col-rt-12">
@@ -74,6 +70,8 @@
           <div class="head2">
             <button onclick="location.href='patients-records.php'" type="button">
               Back</button>
+              <button onclick="location.href='index.php'" type="button">
+                Dashboard</button>
             </div>
       </div>
     </div>
@@ -90,7 +88,7 @@
                 <div class="col-lg-4">
                   <div class="card shadow-sm">
                     <div class="card-header bg-transparent text-center">
-                      <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
+                      <img class="profile_img" src="css/img/medical_bg.jpg" alt="student dp">
                       <h3></h3>
                     </div>
 
@@ -102,14 +100,12 @@
                     		$month = date('m');
                     		$year = date('Y');
                         $rand = rand();
-                      $sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id WHERE medication.patient_id='$id' ";
+                      $sql = "SELECT * from `assigned_patient` WHERE `patient_id`='$id' ";
                       $query = mysqli_query($con,$sql);
 
                       	while ($row = mysqli_fetch_array($query)) {
                         ?>
                       <p class="mb-0"><strong class="pr-1">Patient ID:</strong><?php echo $id;?></p>
-                      <p class="mb-0"><strong class="pr-1">Status:</strong><?php echo $row['status'];?></p>
-
                       <p class="mb-0"><strong class="pr-1">Date:</strong><?php echo $month.'-'.$day.'-'.$year;?></p>
                       <a href='profile-curr-status.php?patient_id=<?php echo $id; ?>'>View Current Status</a>
                       <br>
@@ -119,16 +115,17 @@
                     </div>
                   </div>
                   <br>
-                  <div class="card shadow-sm">
+                  <div class="card shadow-sm" style="border-style:outset ; border-color:rgba(153, 214, 230, 0.5); border-width:2px;">
 
                   <div class ="card-body">
-                    <a href=""><img src="https://printcal.net/web-calendar.png?size=m&w=s&ho=00&mo=00&so=1" alt=""/></a>
+                    <iframe src="https://beepmyclock.com/widget/alarm" frameborder="0" style="border:0;height:135px;"></iframe>
+                    <a href=""><img src="https://printcal.net/web-calendar.png?size=m&w=s&ho=00&mo=00&so=1" alt=""/ style="border-radius: 10px;border-style: outset;border-color: rgba(153, 214, 230, 0.5);"></a>
                   </div>
                 </div>
                 </div>
                 <div class="col-lg-8">
-                  <div class="card shadow-sm">
-                    <div class="card-header bg-transparent border-0">
+                  <div class="card shadow-sm" style="border-style:outset ; border-color:rgba(153, 214, 230, 0.5); border-width:2px;">
+                    <div class="card-header bg-transparent border-0" >
                       <h3 class="mb-0"><i class="far fa-clone pr-1"></i>General Information</h3>
                     </div>
 
@@ -136,7 +133,7 @@
                       <?php
                       $id = $_GET['patient_id'];
                       require '../includes/connect.php';
-                      $sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id WHERE medication.patient_id='$id' ";
+                      $sql = "SELECT * from `assigned_patient` WHERE `patient_id`='$id' ";
                       $query = mysqli_query($con,$sql);
                       ?>
                       <table class="table table-bordered">
@@ -209,9 +206,7 @@
                       ?>
 
                       <table class="table table-bordered">
-                        <?php
-                      	while ($row = mysqli_fetch_array($query)) {
-                          ?>
+
                         <tr>
                           <th >Date</th>
                           <th>Complains</th>
@@ -222,14 +217,19 @@
                           <th>Details</th>
 
                         </tr>
+                        <?php
+                      	while ($row = mysqli_fetch_array($query)) {
+                          $date1 = $row['month'].'-'.$row['date'].'-'.$row['year'];
+                          ?>
                         <tr>
-                          <td><?php echo $month.'-'.$day.'-'.$year;?></td>
-                          <td><?php echo $row['symptoms'];?></td>
+                          <td><?php echo $date1;?></td>
+                          <td><?php echo $row['complain'];?></td>
                           <td><?php echo $row['findings'];?></td>
                           <td><?php echo $row['treatment'];?></td>
                           <td><?php echo $row['medical'];?></td>
                           <td><?php echo $row['reference_no'];?></td>
-                          <td><a href="">View<a></td>
+                          <td><a href="profile-hist-status.php?reference_no=<?php echo $row['reference_no'];?>">View<a></td>
+
                         </tr>
 
                         <?php
