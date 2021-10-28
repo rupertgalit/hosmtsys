@@ -106,7 +106,7 @@ function doctordetails()
 	$sql = "SELECT * FROM `users` WHERE `username`='$username' AND `type`='$type'";
 	$query = mysqli_query($con,$sql);
 	while ($row =mysqli_fetch_array($query)) {
-		echo "Welcome, <b>".$row['fname']." ".$row['sname']."</b>&nbsp($type)";
+		echo "Welcome! Doctor  <b>".$row['fname']." ".$row['sname']."</b>";
 	}
 }
 
@@ -120,7 +120,7 @@ function receptiondetails()
 	$sql = "SELECT * FROM `users` WHERE `username`='$username' AND `type`='$type'";
 	$query = mysqli_query($con,$sql);
 	while ($row =mysqli_fetch_array($query)) {
-		echo "Welcome!, <b>".$row['fname']." ".$row['sname']."</b>&nbsp (RECEPTIONIST)";
+		echo "Welcome! Receptionist <b>".$row['fname']." ".$row['sname']."</b>";
 		// echo "Welcome, <i>".$row['fname']." ".$row['sname']."</i><a href='../logout.php'>Logout</a>";
 
 	}

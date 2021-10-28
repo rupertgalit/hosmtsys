@@ -38,7 +38,8 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 		include "includes/left.php";
 	 ?>
 		<div id="content" class="p-4 p-md-5 pt-5">
-			<a href="addpatient.php" style="margin-left:10px;" style="float:left;"><button class="btnlink">Add Patient</button></a>
+			<!-- <a href="addpatient.php" style="margin-left:10px;" style="float:left;"><button class="btnlink">Add Patient</button></a> -->
+			<br>
 			<div id="table-center">
 			<table class="table" style="width:50% !important;">
 			<?php
@@ -64,10 +65,8 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 				<select name="doctor" class="form" required="required">
 					<option value="">Choose Doctor</option>
 					<option>NormalDoctor</option>
-					<option>DentalDoctor</option>
-					<option>WomenDoctor</option>
 				</select><br><br>
-				<input type="submit" name="btn" value="Assign To Doctor" class="btnlink" id="button">
+				<input type="submit" name="btn" value="Request Doctor" class="btnlink" id="button">
 			</form><br>
 			<?php
 			extract($_POST);

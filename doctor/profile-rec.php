@@ -105,13 +105,13 @@
           <div class="head2">
             <?php
             include "../includes/connect.php";
-            $ref = $_GET ['reference_no'];
+            $ref = $_GET['reference_no'];
             $sql = "SELECT * from `medication` WHERE `reference_no`='$ref' ";
             $query = mysqli_query($con,$sql);
 
               while ($row = mysqli_fetch_array($query)) {
                 ?>
-            <button onclick="location.href='profile.php?id=<?php echo $row['id']; ?>'" type="button">
+            <button onclick="location.href='patients-records.php'" type="button">
               Back</button>
               <button onclick="location.href='index.php'" type="button">
                 Dashboard</button>
@@ -152,6 +152,12 @@
 
                       	while ($row = mysqli_fetch_array($query)) {
                         ?>
+                        <center>
+                        -------------------------------------------------
+                        Reference No
+                        <h4><b> <?php echo $row['reference_no']; ?></b> </h4>
+                        -------------------------------------------------
+                      </center>
                       <p class="mb-0"><strong class="pr-1">Patient ID:</strong><?php echo $row['patient_id'];?></p>
                       <p class="mb-0"><strong class="pr-1">Patient Name:</strong><?php echo $row['fname'].' '.$row['sname'];?></p>
                       <p class="mb-0"><strong class="pr-1">Date:</strong><?php echo $month.'-'.$day.'-'.$year;?></p>
@@ -161,6 +167,7 @@
                         <?php
                       }
                         ?>
+
                     </div>
                   </div>
                   <br>

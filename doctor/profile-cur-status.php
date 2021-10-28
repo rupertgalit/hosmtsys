@@ -11,12 +11,9 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
-
   <!--Only for demo purpose - no need to add.-->
   <link rel="stylesheet" href="css/profile-demo.css" />
-
   <link rel="stylesheet" href="css/profile-style.css">
-
   <style>
 
   body{
@@ -56,13 +53,22 @@
   }
   .card-content1{
   border-style: outset;
+  border-radius: 15px;
+  padding: 10px 10px 10px 20px;
+  margin-top: -20px;
+
+  }
+  .card-content2{
+  border-style: outset;
+  border-radius: 15px;
   padding-left: 20px;
   padding-bottom: 10px;
-  
+
+
   }
   .card-content{
     padding: 10px;
-    margin-top: -70px;
+    margin-top: -20px;
     display:inline-block;
     align-content: space-between;
   }
@@ -108,10 +114,21 @@
         <div class="head">
           <div class="head2">
 
-            <button onclick="location.href='profile.php?id=<?php echo $_GET['$id']; ?>'" type="button">
+            <?php
+            include "../includes/connect.php";
+            $id = $_GET ['id'];
+            $sql = "SELECT * from `medication` WHERE `id`='$id' ";
+            $query = mysqli_query($con,$sql);
+
+              while ($row = mysqli_fetch_array($query)) {
+                ?>
+            <button onclick="location.href='profile.php?id=<?php echo $row['id']; ?>'" type="button">
               Back</button>
               <button onclick="location.href='index.php'" type="button">
                 Dashboard</button>
+                <?php
+              }
+              ?>
             </div>
       </div>
     </div>
@@ -128,7 +145,7 @@
                 <div class="col-lg-4">
                   <div class="card shadow-sm">
                     <div class="card-header bg-transparent text-center">
-                      <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
+                      <img class="profile_img" src="../assets/img/patientdp.jpg" alt="student dp">
                       <h3></h3>
                     </div>
                     <div class="card-body">
@@ -144,22 +161,24 @@
 
                       	while ($row = mysqli_fetch_array($query)) {
                         ?>
+                      <center>
+                      -------------------------------------------------
+                      Reference No
+                      <h4><b> <?php echo $row['reference_no']; ?></b> </h4>
+                      -------------------------------------------------
+                      </center>
                       <p class="mb-0"><strong class="pr-1">Patient ID:</strong><?php echo $row['patient_id'];?></p>
                       <p class="mb-0"><strong class="pr-1">Patient Name:</strong><?php echo $row['fname'].' '.$row['sname'];?></p>
                       <p class="mb-0"><strong class="pr-1">Date:</strong><?php echo $month.'-'.$day.'-'.$year;?></p>
-                      ------------------------------------------------------
+                      *******************
                       <p class="mb-0"><strong class="pr-1">Status:</strong><?php echo $row['status'];?></p>
                       <p class="mb-0"><strong class="pr-1">Complain:</strong><?php echo $row['complain'];?></p>
                       <p class="mb-0"><strong class="pr-1">Findings:</strong><?php echo $row['findings'];?></p>
                       <p class="mb-0"><strong class="pr-1">Treatment:</strong><?php echo $row['treatment'];?></p>
                       <p class="mb-0"><strong class="pr-1">Laboratory Test:</strong><?php echo $row['tests'];?></p>
                       <p class="mb-0"><strong class="pr-1">Test Result:</strong><?php echo $row['test_results'];?></p>
-                      <p class="mb-0"><strong class="pr-1">Medicine:</strong><?php echo $row['medical'];?></p>
+                      <p class="mb-0"><strong class="pr-1">Prescription:</strong><?php echo $row['medical'];?></p>
                       <br>
-                      <center><form>
-                      <input type="submit" value="Done"></input>
-                    </form></center>
-
                         <?php
                       }
                         ?>
@@ -169,7 +188,8 @@
                   <div class="card shadow-sm">
 
                   <div class ="card-body">
-                    <a href=""><img src="https://printcal.net/web-calendar.png?size=m&w=s&ho=00&mo=00&so=1" style="border-radius: 10px" alt=""/></a>
+                    <iframe src="https://beepmyclock.com/widget/alarm" frameborder="0" style="border:0;height:135px;"></iframe>
+                    <a href=""><img src="https://printcal.net/web-calendar.png?size=m&w=s&ho=00&mo=00&so=1" style="border-radius: 10px;border-style: outset;border-color: rgba(153, 214, 230, 0.5);" alt=""/></a>
                   </div>
                 </div>
                 </div>
@@ -270,10 +290,10 @@
                     </div>
                     <div class="card-container1">
                       <div class="card-content1">
-                        <br>
+
                       <form action="profile-cur-status.php?id=<?php echo $id = $_GET['id']; ?>" method="post" enctype = "multipart/form-data" class="form_file">
                         <input type="file" name="file" class="file_btn"> </input>
-                        <input type="submit" name="upload" value="Upload" class="file_btn" > </input>
+                        <input type="submit" name="upload" value="Upload" class="btnlink" > </input>
                       </form>
                       <?php
                       extract($_POST);
@@ -283,11 +303,29 @@
                       }
                        ?>
                      </div>
+                     <br>
                        <div class="card-content2">
                          <br>
-                       <form>
-                       <input type="submit" value="Done"></input>
+                       <form action="profile-cur-status.php?id=<?php echo $id = $_GET['id']; ?>" method="post">
+                       <input type="submit" name="finish" value="Consultation Finished" class="btnlink"  style="width:60%; margin-left:50px;margin-bottom:20px;"></input>
                      </form>
+                     <?php
+                     if (isset($finish)){
+                      @require_once "../includes/connect.php";
+                   		include "../includes/connect.php";
+
+                      $id = $_GET['id'];
+
+                      $sql = "UPDATE `medication` SET `status`='Finished' WHERE `id`='$id'";
+                  		$query = mysqli_query($con,$sql);
+                      if (!empty($query)) {
+                        echo '<script>alert("Successfully Finished")</script>';
+                      }
+                      else{
+                  			echo mysqli_error();
+                  		}
+                     }
+                     ?>
                    </div>
                     </div>
                     </div>

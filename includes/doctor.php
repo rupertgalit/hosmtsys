@@ -96,6 +96,49 @@ function searchnewpatients()
 	}
 }
 
+function patients_records_doc()
+{
+	require 'connect.php';
+
+	$sql = "SELECT *  from assigned_patient Inner JOIN medication on  assigned_patient.patient_id = medication.patient_id  ORDER BY medication.patient_id, medication.month DESC,medication.date DESC,medication.year DESC  ";
+	// $sql = "SELECT * FROM `assigned_patient`";
+	$query = mysqli_query($con,$sql);
+	while ($row = mysqli_fetch_array($query)) {
+
+
+		echo "<tr height=30px'>";
+		echo "<td>P-".$row['patient_id']."</td>";
+		echo "<td>".$row['reference_no']."</td>";
+		echo "<td>".$row['fname']." ".$row['sname']."</td>";
+		echo "<td>".$row['month']."-".$row['date']."-".$row['year'];
+		echo "<td>".$row['status']."</td>";
+		echo "<td><center><a href='profile-rec.php?reference_no=".$row['reference_no']."'>View</a></center></td>";
+		echo "</tr>";
+	}
+}
+
+function searchpatients_records_doc()
+{
+	require 'connect.php';
+	$sachi = $_GET['s'];
+	$sql = "SELECT *  from assigned_patient Inner JOIN medication on  assigned_patient.patient_id = medication.patient_id
+	WHERE `fname` LIKE '%$sachi%' or `sname` LIKE '%$sachi%' ORDER BY medication.patient_id, medication.month DESC,medication.date DESC,medication.year DESC  ";
+	// $sql = "SELECT * FROM `assigned_patient`";
+	$query = mysqli_query($con,$sql);
+	while ($row = mysqli_fetch_array($query)) {
+
+
+		echo "<tr height=30px'>";
+		echo "<td>P-".$row['patient_id']."</td>";
+		echo "<td>".$row['reference_no']."</td>";
+		echo "<td>".$row['fname']." ".$row['sname']."</td>";
+		echo "<td>".$row['month']."-".$row['date']."-".$row['year'];
+		echo "<td>".$row['status']."</td>";
+		echo "<td><center><a href='profile-rec.php?reference_no=".$row['reference_no']."'>View</a></center></td>";
+		echo "</tr>";
+	}
+}
+
 function addtest()
 {
 
@@ -201,6 +244,7 @@ function upload()
 	$id = $_GET['id'];
 	$sql = "SELECT * From `medication` WHERE `id`='$id'";
 	$query = mysqli_query($con,$sql);
+	if (!empty($query)) {
 	while ($row = mysqli_fetch_array($query)) {
 
 
@@ -217,7 +261,7 @@ function upload()
 	$new_file_name = strtolower($file);
 	/* make file name in lower case */
 	$final_file=str_replace(' ','-',$new_file_name);
-
+}
 	if(move_uploaded_file($file_loc,$folder.$final_file))
 	{
 
@@ -236,8 +280,14 @@ function upload()
 			echo mysqli_error();
 		}
 	}
+
+}
+else{
+	echo mysqli_error();
 }
 }
+
+
 
 function settings()
 {

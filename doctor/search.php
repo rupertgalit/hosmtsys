@@ -40,7 +40,7 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 		include "includes/left.php";
 	 ?>
 		<div id="content" class="p-4 p-md-5 pt-5"><br>
-			<form action="search.php" method="get" style="float:left;margin-left:15px;"><input type="text" style="height:25px; width:180px;padding-left:15px;" name="s" placeholder="Search Patient By ID"></form><br>
+			<form action="search.php" method="get" style="float:left;margin-left:15px;"><input type="text" style="height:35px; width:200px;padding-left:15px;" name="s" placeholder="Search Patient By Name"></form><br>
 			<br><table class="table" style="width:98% !important;">
 				<tr>
 					<th>ID</th>

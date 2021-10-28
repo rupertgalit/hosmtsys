@@ -101,7 +101,7 @@ tr{
                 <div class="col-lg-4">
                   <div class="card shadow-sm">
                     <div class="card-header bg-transparent text-center">
-                      <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
+                      <img class="profile_img" src="../assets/img/patientdp.jpg" alt="student dp">
                       <h3></h3>
                     </div>
 
@@ -214,7 +214,7 @@ tr{
                       $rand = rand();
 
                       require '../includes/connect.php';
-                      $sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id WHERE medication.id='$id' ";
+                      $sql = "SELECT * from medication Inner JOIN assigned_patient on medication.patient_id = assigned_patient.patient_id WHERE medication.id='$id' ORDER BY medication.month desc,medication.date desc ";
                       $query = mysqli_query($con,$sql);
                       ?>
                       <table class="table table-bordered">
@@ -232,10 +232,11 @@ tr{
                       	while ($row = mysqli_fetch_array($query)) {
                           $patient_id = $row['patient_id'];
                           $date1 = $row['month'].'-'.$row['date'].'-'.$row['year'];
-                          $sql1 = "SELECT * from `medication`  WHERE `patient_id`='$patient_id' ORDER BY '$date1' ";
+                          $sql1 = "SELECT * from `medication`  WHERE `patient_id`='$patient_id' ORDER BY medication.month desc ,medication.date desc,medication.year desc ";
                           $query1 = mysqli_query($con,$sql1);
                           while ($roww= mysqli_fetch_array($query1)) {
                             $date1 = $roww['month'].'-'.$roww['date'].'-'.$roww['year'];
+                            
                           ?>
                         <tr>
                           <td><?php echo $date1;?></td>

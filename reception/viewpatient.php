@@ -65,10 +65,9 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 				<select name="doctor" class="form" required="required">
 					<option value="">Choose Doctor</option>
 					<option>NormalDoctor</option>
-					<option>DentalDoctor</option>
-					<option>WomenDoctor</option>
+
 				</select><br><br>
-				<input type="submit" name="btn" value="Assign To Doctor" class="btnlink" id="button">
+				<input type="submit" name="btn" value="Request Doctor" class="btnlink" id="button">
 			</form><br>
 			<?php
 			extract($_POST);

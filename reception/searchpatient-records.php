@@ -34,7 +34,7 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 		include "includes/left.php";
 	 ?>
 		<div id="content" class="p-4 p-md-5 pt-5"><br>
-			<a href="patients-records.php" style="margin-left:10px;" style="float:left;"><button class="btnlink">Back</button></a><form action="searchpatient-records.php" method="get" style="float:right;margin-right:15px;"><input type="text" style="height:25px; width:180px;padding-left:15px;" name="s" placeholder="Search Patient By ID"></form><br>
+			<a href="patients-records.php" style="margin-left:10px;" style="float:left;"><button class="btnlink">Back</button></a><form action="searchpatient-records.php" method="get" style="float:right;margin-right:15px;"><input type="text" style="height:35px; width:200px;padding-left:15px;" name="s" placeholder="Search Patient By Name"></form><br>
 			<br>
 			<table class="table" style="width:98% !important;">
 				<tr>

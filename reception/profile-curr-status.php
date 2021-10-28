@@ -94,7 +94,7 @@
                 <div class="col-lg-4">
                   <div class="card shadow-sm">
                     <div class="card-header bg-transparent text-center">
-                      <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
+                      <img class="profile_img" src="../assets/img/patientdp.jpg" alt="student dp">
                       <h3></h3>
                     </div>
 

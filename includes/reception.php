@@ -356,6 +356,7 @@ function assigntodoctor()
 {
 	include "connect.php";
 	$doctor = trim(htmlspecialchars($_POST['doctor']));
+	// $doctor = trim(htmlspecialchars("NormalDoctor"));
 	$complain = trim(htmlspecialchars($_POST['complain']));
 
 	require_once "connect.php";
@@ -535,6 +536,7 @@ function assigntodoctor_oldp()
 {
 	include "connect.php";
 	$doctor = trim(htmlspecialchars($_POST['doctor']));
+	$doctor = "NormalDoctor";
 	$complain = trim(htmlspecialchars($_POST['complain']));
 	require_once "connect.php";
 	$id = $_GET['patient_id'];

@@ -36,8 +36,10 @@
 						</a>
           </li>
 					<li>
-            <a href="reports.php"><span class="fa fa-bar-chart mr-3"></span> Reports</a>
-          </li>
+            <a href="patients-records.php"><span class="fa fa-bar-chart mr-3"></span>Patient's Records
+						
+						</a>
+					</li>
           <li>
             <a href="settings.php"><span class="fa fa-cog mr-3"></span> Settings</a>
           </li>

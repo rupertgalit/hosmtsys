@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
+if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 	header("Location: ../index.php");
 }
 ?>
@@ -47,18 +47,15 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 			<table class="table" style="width:98% !important;">
 				<tr>
 					<th>Patient ID</th>
-					<th>Firstname</th>
-					<th>Surname</th>
-					<th>Phone</th>
-					<th>Sex</th>
-					<th>Birth Year</th>
-					<th>View</th>
-					<th>Edit</th>
-					<th>Delete</th>
+					<th>Reference No</th>
+					<th>Patient's Name</th>
+					<th>Consultation Date</th>
+					<th>Status</th>
+					<th>Details</th>
 				</tr>
 				<?php
-				require '../includes/reception.php';
-				patients_records();
+				require '../includes/doctor.php';
+				patients_records_doc();
 				 ?>
 			</table>
 
