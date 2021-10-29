@@ -5,6 +5,7 @@ function patients()
 	require 'connect.php';
 	$sql = "SELECT * FROM `patient`";
 	$query = mysqli_query($con,$sql);
+	$year = date('Y');
 	while ($row = mysqli_fetch_array($query)) {
 		echo "<tr height=30px'>";
 		echo "<td>".$row['id']."</td>";

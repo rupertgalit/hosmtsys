@@ -51,7 +51,7 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 			<form action="search.php" method="get" style="float:right;margin-right:15px;"><input type="text" style="height:25px; width:180px;padding-left:5px;" name="s" placeholder="Search Patient's Name"></form><br><br>
 			<table class="table" style="width:98% !important;">
 				<tr>
-					<th>Id</th>
+					<th>Patient Id</th>
 					<th>Firstname</th>
 					<th>Surname</th>
 					<th>Phone</th>
